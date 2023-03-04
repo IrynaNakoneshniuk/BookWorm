@@ -12,4 +12,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="UserSecrets">
+      <HintPath>..\UserSecrets\bin\Debug\net6.0\UserSecrets.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

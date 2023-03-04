@@ -1,5 +1,6 @@
 ﻿using BookWorm.ModelDB;
 using Microsoft.EntityFrameworkCore;
+using UserSecrets;
 
 namespace BookWorm.DataAccess
 {
@@ -13,7 +14,7 @@ namespace BookWorm.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=mysqlserver2589.database.windows.net;Initial Catalog=mySampleDatabase;User ID=azureuser;Password=homer+2589;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            optionsBuilder.UseSqlServer(Secrets.ConnectionString);
         }
     }
 }

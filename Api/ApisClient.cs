@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using BookWorm.DTO;
 using System.Text;
 using UserSecrets;
+using System.Windows;
+using Azure;
 
 namespace BookWorm.Api
 {
@@ -17,32 +19,45 @@ namespace BookWorm.Api
 
         public static async Task<T> GetData<T>(string requestUrl)
         {
-            var response = await _httpClient.GetAsync(requestUrl);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                JObject obj = JObject.Parse(content);
-                var parseJson = obj["results"].ToString();
-                T result = JsonConvert.DeserializeObject<T>(parseJson);
-                return result;
+                var response = await _httpClient.GetAsync(requestUrl);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    JObject obj = JObject.Parse(content);
+                    var parseJson = obj["results"].ToString();
+                    T result = JsonConvert.DeserializeObject<T>(parseJson);
+                    return result;
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
-            throw new Exception($"Не вдалося виконати пошук. Код статусу: {response.StatusCode}");
+
+            throw new Exception("No data found");
         }
 
 
         public static async Task<BookDto> SearchBookAsync(string query)
         {
-            var apiUrl = EndPointApi.GetBaseUrlGuenbergApi() + EndPointApi.FilterByAuthorOrTitle(query);
-            var response = await _httpClient.GetAsync(apiUrl);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                BookDto result = JsonConvert.DeserializeObject<BookDto>(content);
-                return result;
-            }
+                var apiUrl = EndPointApi.GetBaseUrlGuenbergApi() + EndPointApi.FilterByAuthorOrTitle(query);
+                var response = await _httpClient.GetAsync(apiUrl);
 
-            throw new Exception($"Не вдалося виконати пошук. Код статусу: {response.StatusCode}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    BookDto result = JsonConvert.DeserializeObject<BookDto>(content);
+                    return result;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return null;
         }
 
 
@@ -54,22 +69,30 @@ namespace BookWorm.Api
             }
             catch (Exception ex)
             {
-                throw new Exception($"Не вдалося виконати пошук");
+                MessageBox.Show(ex.Message);
             }
+            throw new Exception("Не вдалось виконати пошук");
         }
 
 
         public static async Task<string> GetBookTextAsync(string bookId)
         {
-            var response = await _httpClient.GetAsync(EndPointApi.GetTextBooksUrl(bookId));
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                return content;
-            }
+                var response = await _httpClient.GetAsync(EndPointApi.GetTextBooksUrl(bookId));
 
-            throw new Exception($"Не вдалося отримати текст книги. Код статусу: {response.StatusCode}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    return content;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            throw new Exception($"Не вдалося отримати текст книги");
         }
 
 
@@ -82,25 +105,34 @@ namespace BookWorm.Api
             }
             catch (Exception ex)
             {
-                throw new Exception($"Не вдалося виконати пошук");
+                MessageBox.Show(ex.Message);
             }
+            return null;
         }
         public static async Task<List<TranslationResultDto>> TranslateText(string text, string fromLang, string toLang)
         {
             Object[] body = new Object[] { new { Text = text } };
-            var requestBody = JsonConvert.SerializeObject(body);
-            using (var request = new HttpRequestMessage())
+            try
             {
-                request.Method = HttpMethod.Post;
-                request.RequestUri = new Uri(EndPointApi.TranslatorEndPoint(fromLang, toLang));
-                request.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
-                request.Headers.Add("Ocp-Apim-Subscription-Key", Secrets.ApiKey);
-                request.Headers.Add("Ocp-Apim-Subscription-Region", "westeurope");
-                var response = await _httpClient.SendAsync(request);
-                var responseBody = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<List<TranslationResultDto>>(responseBody);
-                return result;
+                var requestBody = JsonConvert.SerializeObject(body);
+                using (var request = new HttpRequestMessage())
+                {
+                    request.Method = HttpMethod.Post;
+                    request.RequestUri = new Uri(EndPointApi.TranslatorEndPoint(fromLang, toLang));
+                    request.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
+                    request.Headers.Add("Ocp-Apim-Subscription-Key", Secrets.ApiKey);
+                    request.Headers.Add("Ocp-Apim-Subscription-Region", "westeurope");
+                    var response = await _httpClient.SendAsync(request);
+                    var responseBody = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<List<TranslationResultDto>>(responseBody);
+                    return result;
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
+
+            throw new Exception($"Не вдалося перекласти текст");
         }
     }
 }

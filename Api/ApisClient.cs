@@ -84,5 +84,23 @@ namespace BookWorm.Api
                 throw new Exception($"Не вдалося виконати пошук");
             }
         }
+        public static async Task<List<TranslationResultDto>> TranslateText(string text, string fromLang, string toLang)
+        {
+            string key = "60ac58afddca41a5aa682001f644a4f0";
+            Object[] body = new Object[] { new { Text = text } };
+            var requestBody = JsonConvert.SerializeObject(body);
+            using (var request = new HttpRequestMessage())
+            {
+                request.Method = HttpMethod.Post;
+                request.RequestUri = new Uri(EndPointApi.TranslatorEndPoint(fromLang, toLang));
+                request.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
+                request.Headers.Add("Ocp-Apim-Subscription-Key", key);
+                request.Headers.Add("Ocp-Apim-Subscription-Region", "westeurope");
+                var response = await _httpClient.SendAsync(request);
+                var responseBody = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<List<TranslationResult>>(responseBody);
+                return result;
+            }
+        }
     }
 }

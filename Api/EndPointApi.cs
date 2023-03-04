@@ -11,5 +11,6 @@ namespace BookWorm.Api
         public static  string FilterByAuthorOrTitle(string authorOrTitle) => $"/books?search={authorOrTitle}";
         public static string FilterByTopic(string topic) => $"/books?topic={topic}";
         public static string FilterById(string bookId) => $"/books/{bookId}";
+        public static string TranslatorEndPoint(string from, string to) => $"https://api-eur.cognitive.microsofttranslator.com/translate?api-version=3.0&from={from}&to={to}";
     }
 }

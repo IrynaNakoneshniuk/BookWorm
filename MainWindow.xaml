@@ -13,29 +13,99 @@
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="BookLend" Height="450" Width="800" >
+        Title="BookLend" Height="1000" Width="1000" >
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="170"/>
+            <ColumnDefinition Width="177"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Border >
-            <Grid >
+        <materialDesign:Card>
+            <Grid Background="#E2FFFF">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition />
                 </Grid.RowDefinitions>
-                <Image Source=".\Assets\logoMp.png" Width="125" Height="62.12"/>
-            </Grid>
-        </Border>
-        <Border Grid.Column="1">
-            <Grid>
-                <Image Source=".\Assets\main_img.png"/>
-            </Grid>
 
-        </Border>
+                <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\logoMp.png" Width="125" Height="62.12"/>
+                <Button Grid.Row="1" Style="{StaticResource MaterialDesignFlatSecondaryButton}" Width="170" Height="100" Background="#CFFBFE">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\library.png" Height="53" />
+                        <Label Content="Бібліотека" FontSize="14" Foreground="#4B93B9"/>
+                    </StackPanel>
+                </Button>
+                <Button Grid.Row="2" Style="{StaticResource MaterialDesignFlatSecondaryButton}" Width="170" Height="100" Background="#CFFBFE"
+                        Margin="0 5 0 5">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\book.png" Height="40"/>
+                        <Label Content="Книжкова поличка" Foreground="#4B93B9" FontSize="14"/>
+                    </StackPanel>
+                </Button>
+                <Button Grid.Row="3" Style="{StaticResource MaterialDesignFlatSecondaryButton}" Width="170" Height="100" Background="#CFFBFE"
+                        Margin="0 5 0 5">
+                    <StackPanel>
+                        <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\find.png" Height="40"/>
+                        <Label Content="Пошук книги" Foreground="#4B93B9" FontSize="14"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Column="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.7*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.4*"/>
+                </Grid.RowDefinitions>
+                <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\main_img.png" VerticalAlignment="Stretch" 
+                   HorizontalAlignment="Stretch" Grid.RowSpan="3" Grid.ColumnSpan="3" />
+                <Border Grid.Row="1" Grid.Column="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Вхід в систему" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               FontSize="30" Style="{StaticResource MaterialDesignLabel}"/>
+                        <TextBox Grid.Row="1"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                       VerticalAlignment="Top"
+                       materialDesign:HintAssist.Hint="Логін"
+                       materialDesign:HintAssist.HelperText="E-mail" BorderBrush="Gray">
+                        </TextBox>
+                        <StackPanel Grid.Row="2"
+                          Orientation="Vertical">
+                            <PasswordBox
+                            Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
+                           materialDesign:HintAssist.Hint="Пароль"
+                           materialDesign:HintAssist.HelperText="Password" BorderBrush="Gray"
+                           materialDesign:PasswordBoxAssist.Password="{Binding Path=Password2Validated, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" />
+                        </StackPanel>
+                        <Button Grid.Row="3" Background="#FAB753" Content="Вхід" FontSize="18" Height="40" VerticalAlignment="Top"/>
+                        <Border Grid.Row="4">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button Style="{StaticResource MaterialDesignFlatSecondaryButton}" Content="Забули пароль?" Foreground="#373737" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                <Button Style="{StaticResource MaterialDesignFlatSecondaryButton}" Content="Реєстрація" Foreground="#2F6891"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="1"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </Window>

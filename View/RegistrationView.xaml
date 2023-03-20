@@ -1,0 +1,116 @@
+﻿<UserControl x:Class="BookWorm.View.RegistrationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookWorm.View"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="830">
+    <Grid>
+        <Grid >
+            <materialDesign:Card>
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition Height="0.3*"/>
+                    </Grid.RowDefinitions>
+                </Grid>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Column="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.7*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="0.4*"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\main_img.png" VerticalAlignment="Stretch" 
+                   HorizontalAlignment="Stretch" Grid.RowSpan="3" Grid.ColumnSpan="3" />
+                    <Border Grid.Row="1" Grid.Column="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Реєстрація" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               FontSize="30" Style="{StaticResource MaterialDesignLabel}"/>
+                            <TextBox Grid.Row="1"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                       VerticalAlignment="Top"
+                       materialDesign:HintAssist.Hint="Ім'я"
+                       materialDesign:HintAssist.HelperText="Name" BorderBrush="Gray">
+                            </TextBox>
+                            <TextBox Grid.Row="2"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                       VerticalAlignment="Top"
+                       materialDesign:HintAssist.Hint="Прізвище"
+                       materialDesign:HintAssist.HelperText="Surname" BorderBrush="Gray">
+                            </TextBox>
+                            <TextBox Grid.Row="3"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                       VerticalAlignment="Top"
+                       materialDesign:HintAssist.Hint="Логін"
+                       materialDesign:HintAssist.HelperText="E-mail" BorderBrush="Gray">
+                            </TextBox>
+                            <TextBox Grid.Row="4"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                       VerticalAlignment="Top"
+                       materialDesign:HintAssist.Hint="Код"
+                       materialDesign:HintAssist.HelperText="Code" BorderBrush="Gray">
+                            </TextBox>
+                            <StackPanel Grid.Row="5"
+                          Orientation="Vertical">
+                                <PasswordBox 
+                            Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
+                           materialDesign:HintAssist.Hint="Пароль"
+                           materialDesign:HintAssist.HelperText="Password" BorderBrush="Gray"
+                           materialDesign:PasswordBoxAssist.Password="{Binding Path=Password2Validated, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" />
+                            </StackPanel>
+                            <StackPanel Grid.Row="6"
+                          Orientation="Vertical">
+                                <PasswordBox 
+                            Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
+                           materialDesign:HintAssist.Hint="Повторіть пароль"
+                           materialDesign:HintAssist.HelperText="Repeat password" BorderBrush="Gray"
+                           materialDesign:PasswordBoxAssist.Password="{Binding Path=Password2Validated, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" />
+                            </StackPanel>
+                            <Button Grid.Row="7" Background="#FAB753" Content="Реєстрація" FontSize="18" Height="40" VerticalAlignment="Top"/>
+                            <Border Grid.Row="8">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Style="{StaticResource MaterialDesignFlatSecondaryButton}" Content="Вхід" Foreground="#2F6891"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="1"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -13,12 +13,13 @@
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="BookLend" Height="1000" Width="1000" >
+        Title="BookLend"  Height="1000" Width="1000">
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="177"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        
         <materialDesign:Card>
             <Grid Background="#E2FFFF">
                 <Grid.RowDefinitions>
@@ -65,7 +66,24 @@
                     <RowDefinition Height="0.4*"/>
                 </Grid.RowDefinitions>
                 <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\main_img.png" VerticalAlignment="Stretch" 
-                   HorizontalAlignment="Stretch" Grid.RowSpan="3" Grid.ColumnSpan="3" />
+                   HorizontalAlignment="Stretch" Grid.RowSpan="3" Grid.ColumnSpan="3"  />
+                <StackPanel  Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
+                    <Menu  VerticalAlignment="Center"
+                   Foreground="#36aab3">
+                        <MenuItem>
+                            <MenuItem.Header >
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Text="Ірина" HorizontalAlignment="Center" Foreground="#36aab3" Margin="10"/>
+                                    <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\user.png" Width="40"/>
+                                </StackPanel>
+                            </MenuItem.Header>
+                            <MenuItem Header="Увійти"/>
+                            <Separator/>
+                            <MenuItem Header="Вийти"/>
+                        </MenuItem>
+                    </Menu>
+                </StackPanel>
+                
                 <Border Grid.Row="1" Grid.Column="1">
                     <Grid>
                         <Grid.RowDefinitions>

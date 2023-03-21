@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace BookWorm.View
 {
     /// <summary>
-    /// Interaction logic for ErrorValidationView.xaml
+    /// Interaction logic for UserLoginView.xaml
     /// </summary>
-    public partial class ErrorValidationView : UserControl
+    public partial class UserLoginView : UserControl
     {
-        public ErrorValidationView()
+        public UserLoginView()
         {
             InitializeComponent();
         }

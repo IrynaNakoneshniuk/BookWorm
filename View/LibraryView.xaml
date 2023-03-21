@@ -20,11 +20,26 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Image  Source="\Assets\main_img.png" Grid.RowSpan="3"></Image>
         <TextBox Grid.Row="0" Margin="10" Width="400" HorizontalAlignment="Left"
         Style="{StaticResource MaterialDesignOutlinedTextBox}"
         VerticalAlignment="Top"
         materialDesign:HintAssist.Hint="Введіть назву книги або автора"/>
+        <!--<StackPanel  Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
+            <Menu  VerticalAlignment="Top"
+                   Foreground="#36aab3">
+                <MenuItem>
+                    <MenuItem.Header >
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock Text="Ірина" HorizontalAlignment="Center" Foreground="#36aab3" Margin="10"/>
+                            <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\user.png" Width="40"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                    <MenuItem Header="Увійти"/>
+                    <Separator/>
+                    <MenuItem Header="Вийти"/>
+                </MenuItem>
+            </Menu>
+        </StackPanel>-->
         <Label Content="Бібліотека" VerticalAlignment="Bottom" FontWeight="Bold"
                Foreground="Orange" FontSize="25" Margin="10"/>
         <ListView Grid.Row="1" Margin="10">

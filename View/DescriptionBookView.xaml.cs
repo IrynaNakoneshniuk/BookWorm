@@ -1,5 +1,4 @@
-﻿using BookWorm.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,19 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BookWorm
+namespace BookWorm.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DescriptionBookView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DescriptionBookView : UserControl
     {
-        private readonly MainVM mainVM;
-        public MainWindow()
+        public DescriptionBookView()
         {
             InitializeComponent();
-            mainVM= new MainVM();
-            this.DataContext = mainVM; 
         }
     }
 }

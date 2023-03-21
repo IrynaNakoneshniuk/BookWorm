@@ -14,7 +14,7 @@
      FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="830">
-    <Grid>
+    <Grid Background="White">
         <Grid >
             <materialDesign:Card>
                 <Grid >
@@ -29,17 +29,15 @@
             <materialDesign:Card Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.3*"/>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="0.7*"/>
+                        <ColumnDefinition Width="0.5*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition Height="0.1*"/>
                         <RowDefinition/>
-                        <RowDefinition Height="0.4*"/>
+                        <RowDefinition Height="0.1*"/>
                     </Grid.RowDefinitions>
-                    <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\main_img.png" VerticalAlignment="Stretch" 
-                   HorizontalAlignment="Stretch" Grid.RowSpan="3" Grid.ColumnSpan="3" />
                     <Border Grid.Row="1" Grid.Column="1">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -49,11 +47,16 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition Height="0.5*"/>
                                 <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
                             </Grid.RowDefinitions>
                             <Label Content="Реєстрація" VerticalAlignment="Center" HorizontalAlignment="Center"
                                FontSize="30" Style="{StaticResource MaterialDesignLabel}"/>
@@ -63,42 +66,36 @@
                        materialDesign:HintAssist.Hint="Ім'я"
                        materialDesign:HintAssist.HelperText="Name" BorderBrush="Gray">
                             </TextBox>
-                            <TextBox Grid.Row="2"
+                            <TextBox Grid.Row="3" 
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                        VerticalAlignment="Top"
                        materialDesign:HintAssist.Hint="Прізвище"
                        materialDesign:HintAssist.HelperText="Surname" BorderBrush="Gray">
                             </TextBox>
-                            <TextBox Grid.Row="3"
+                            <TextBox Grid.Row="5" 
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                        VerticalAlignment="Top"
                        materialDesign:HintAssist.Hint="Логін"
                        materialDesign:HintAssist.HelperText="E-mail" BorderBrush="Gray">
                             </TextBox>
-                            <TextBox Grid.Row="4"
+                            <TextBox Grid.Row="7" 
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                        VerticalAlignment="Top"
                        materialDesign:HintAssist.Hint="Код"
                        materialDesign:HintAssist.HelperText="Code" BorderBrush="Gray">
                             </TextBox>
-                            <StackPanel Grid.Row="5"
-                          Orientation="Vertical">
-                                <PasswordBox 
+                            <PasswordBox Grid.Row="9" 
                             Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                            materialDesign:HintAssist.Hint="Пароль"
                            materialDesign:HintAssist.HelperText="Password" BorderBrush="Gray"
                            materialDesign:PasswordBoxAssist.Password="{Binding Path=Password2Validated, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" />
-                            </StackPanel>
-                            <StackPanel Grid.Row="6"
-                          Orientation="Vertical">
-                                <PasswordBox 
+                            <PasswordBox Grid.Row="11" 
                             Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                            materialDesign:HintAssist.Hint="Повторіть пароль"
                            materialDesign:HintAssist.HelperText="Repeat password" BorderBrush="Gray"
                            materialDesign:PasswordBoxAssist.Password="{Binding Path=Password2Validated, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" />
-                            </StackPanel>
-                            <Button Grid.Row="7" Background="#FAB753" Content="Реєстрація" FontSize="18" Height="40" VerticalAlignment="Top"/>
-                            <Border Grid.Row="8">
+                            <Button Grid.Row="13"  Background="#FAB753" Content="Реєстрація" FontSize="18" Height="40" VerticalAlignment="Top"/>
+                            <Border Grid.Row="15" >
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>

@@ -2,6 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:BookWorm"
+             xmlns:view="clr-namespace:BookWorm.View"
+             xmlns:viewmodels="clr-namespace:BookWorm.ViewModel"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -11,6 +13,24 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewmodels:RegistrationVM}">
+                <view:RegistrationView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:BookShelfVM}">
+                <view:BookShelfView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:DescriptionBooKVM}">
+                <view:DescriptionBookView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:LibraryVM}">
+                <view:LibraryView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ReadingModeVM}">
+                <view:ReadingModeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:UserLoginVM}">
+                <view:UserLoginView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

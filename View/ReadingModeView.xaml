@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookWorm.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <Grid Background="AliceBlue">
+        <FlowDocumentReader></FlowDocumentReader>
     </Grid>
 </UserControl>

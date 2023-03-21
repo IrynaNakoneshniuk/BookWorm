@@ -20,7 +20,6 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Image Grid.RowSpan="3" Source="\Assets\main_img.png"></Image>
         <TextBox Grid.Row="0" Margin="10" Width="400" HorizontalAlignment="Left"
         Style="{StaticResource MaterialDesignOutlinedTextBox}"
         VerticalAlignment="Top"

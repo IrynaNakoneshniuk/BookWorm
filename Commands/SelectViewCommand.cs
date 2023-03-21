@@ -7,46 +7,43 @@ using System.Windows;
 using System.Windows.Input;
 using BookWorm.ViewModel;
 
+
 namespace BookWorm.Commands
 {
-    public class SelectViewCommand : ICommand
+    public class SelectViewCommand : AsyncCommandBase
     {
-        private MainVM mainSelectorView;
-        public SelectViewCommand(MainVM mainVM) {
-            mainSelectorView = mainVM;
-        }
-        public event EventHandler? CanExecuteChanged;
+        private readonly MainVM _mainSelectorView;
 
-        public bool CanExecute(object? parameter)
+        public SelectViewCommand(MainVM mainVM, Action<Exception> ex):base(ex)
         {
-            return true;
+            _mainSelectorView = mainVM;
         }
 
-        public  void Execute(object? parameter)
+        protected override async Task ExecuteAsync(object? parameter)
         {
             try
             {
                 if (parameter.ToString() == "Registration")
                 {
-                    mainSelectorView.SelectView = new RegistrationVM();
+                    _mainSelectorView.SelectView = new RegistrationVM();
                 }
-                else if(parameter.ToString()== "Login")
+                else if (parameter.ToString() == "Login")
                 {
-                    mainSelectorView.SelectView= new UserLoginVM();
+                    _mainSelectorView.SelectView = new UserLoginVM();
                 }
-                else if(parameter.ToString()== "Shelf")
+                else if (parameter.ToString() == "Shelf")
                 {
-                    mainSelectorView.SelectView =new BookShelfVM();
+                    _mainSelectorView.SelectView = new BookShelfVM();
                 }
-                else if(parameter.ToString()=="Library")
+                else if (parameter.ToString() == "Library")
                 {
-                    mainSelectorView.SelectView = new LibraryVM();
+                    _mainSelectorView.SelectView = new LibraryVM();
                 }
-            }
-            catch (Exception ex) {
+            }catch(Exception ex)
+            {
                 MessageBox.Show(ex.Message);
             }
+            
         }
     }
-
 }

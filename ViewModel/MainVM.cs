@@ -16,20 +16,21 @@ namespace BookWorm.ViewModel
 
       private BaseVM _baseVM;
 
-      public BaseVM SelectView { 
-            
-            get { return _baseVM; } 
+      public BaseVM SelectView {
 
-            set {
-                _baseVM = value;
-                OnPropertyChanged(nameof(SelectView));
-            }
+       get { return _baseVM; }
+
+       set
+       {
+            _baseVM = value;
+            OnPropertyChanged(nameof(SelectView));
+       }
       }
 
 
       public MainVM() {
             _baseVM = this;
-            SelectViewCommand = new SelectViewCommand(this);
+            SelectViewCommand = new SelectViewCommand(this, (ex)=>new Exception());
       }
     }
 }

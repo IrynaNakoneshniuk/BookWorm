@@ -64,5 +64,21 @@ namespace BookWorm.DataAccess
                 }
             }
         }
+
+
+        public async Task<bool> IsEmailExist(string ? email)
+        {
+            using (var db = new MyDbContext()){
+                try
+                {
+                    return await db.Users.AnyAsync(i=>i.Email.Equals(email));
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                return false;
+            }
+        }
     }
 }

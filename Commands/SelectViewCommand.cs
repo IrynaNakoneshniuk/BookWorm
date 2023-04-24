@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using BookWorm.Services;
 using BookWorm.ViewModel;
 
 
@@ -14,9 +15,10 @@ namespace BookWorm.Commands
     {
         private readonly MainVM _mainSelectorView;
 
-        public SelectViewCommand(MainVM mainVM, Action<Exception> ex):base(ex)
+
+        public SelectViewCommand(MainVM mainSelectorView)
         {
-            _mainSelectorView = mainVM;
+            _mainSelectorView = mainSelectorView;
         }
 
         protected override async Task ExecuteAsync(object? parameter)
@@ -25,7 +27,19 @@ namespace BookWorm.Commands
             {
                 if (parameter.ToString() == "Registration")
                 {
-                    _mainSelectorView.SelectView = new RegistrationVM();
+                   
+                    if (_mainSelectorView.ValidationVM.Code == DigitCodeGenerator.ConfirmCode.ToString())
+                    {
+                        _mainSelectorView.IsControlAVisible = false;
+                        _mainSelectorView.SelectView = new RegistrationVM();
+                        _mainSelectorView.Email= _mainSelectorView.ValidationVM.Email;
+                    }
+                    else
+                    {
+                        _mainSelectorView.ValidationVM.Message = "Не вірно вказаний код!";
+                        _mainSelectorView.ValidationVM.Code = null;
+                    }
+            
                 }
                 else if (parameter.ToString() == "Login")
                 {
@@ -38,6 +52,10 @@ namespace BookWorm.Commands
                 else if (parameter.ToString() == "Library")
                 {
                     _mainSelectorView.SelectView = new LibraryVM();
+                }
+                else if(parameter.ToString() == "Validation")
+                {
+                    _mainSelectorView.SelectView = new ValidationEmailVM();
                 }
             }catch(Exception ex)
             {

@@ -30,6 +30,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:UserLoginVM}">
                 <view:UserLoginView/>
+            </DataTemplate >
+            <DataTemplate DataType="{x:Type viewmodels:ValidationEmailVM}">
+                <view:ValidationEmail/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

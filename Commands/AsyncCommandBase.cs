@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace BookWorm.Commands
@@ -12,10 +13,6 @@ namespace BookWorm.Commands
 
         private readonly Action<Exception> _onException;
 
-        public AsyncCommandBase(Action<Exception> onException)
-        {
-            _onException=onException;
-        }
 
         public bool IsExecuting
         {
@@ -26,6 +23,7 @@ namespace BookWorm.Commands
                 CanExecuteChanged?.Invoke(this, new EventArgs());
             }
         }
+
 
         public bool CanExecute(object? parameter)
         {
@@ -42,7 +40,7 @@ namespace BookWorm.Commands
             }
             catch(Exception ex)
             {
-                _onException.Invoke(ex);
+                MessageBox.Show(ex.Message);
             }
            
             IsExecuting= false;

@@ -16,7 +16,6 @@ namespace BookWorm.Commands
             this._validationVM = validationVM;
         }
 
-
         protected override async Task ExecuteAsync(object? parameter)
         {
             try
@@ -27,17 +26,21 @@ namespace BookWorm.Commands
                 {
                     _validationVM.Message = "Електронна пошта вже використовується!";
                     _validationVM.Email = null;
+                    return;
                 }
                 else if (!EmailRegex(_validationVM.Email))
                 {
                     _validationVM.Message = "Некоректнo введена електронна адреса!";
                     _validationVM.Email = null;
+                    return;
                 }
                 else
                 {
                     EmailSender emailSenderemail = new EmailSender();
+                    CurrentSession.Email = _validationVM.Email;
                     string Message = $"Для підтвердження електронної пошти введіть код {DigitCodeGenerator.Generate()} ";
                     await emailSenderemail.SendAsync(_validationVM.Email, "Підтвердження електронної пошти", Message);
+                    _validationVM.IsFieldVisible = true;
                 }
             }
             catch(Exception ex)

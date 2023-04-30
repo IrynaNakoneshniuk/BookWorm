@@ -9,18 +9,31 @@ namespace BookWorm.ViewModel
     {
         public ICommand ValidationCommand { get; set; }
 
-
         private string _email;
 
         private string _code;
 
         private string _message;
 
+
+        private bool _isFieldVisibility = false;
         public ValidationEmailVM()
         {
             this.ValidationCommand = new ValidationEmailCommand(this);
         }
 
+        public bool IsFieldVisible
+        {
+            get
+            {
+                return _isFieldVisibility;
+            }
+            set
+            {
+                _isFieldVisibility = value;
+                OnPropertyChanged(nameof(IsFieldVisible));
+            }
+        }
 
         public string Email
         {

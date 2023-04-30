@@ -14,7 +14,7 @@
      FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="830">
-    <Grid Background="White" >
+    <Grid Background="White"  >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition/>
@@ -49,12 +49,12 @@
                        VerticalAlignment="Top"
                        materialDesign:HintAssist.Hint="Код"
                        materialDesign:HintAssist.HelperText="Code" BorderBrush="Gray"
-                             Text="{Binding ValidationVM.Code, Mode=TwoWay}">
+                             Text="{Binding ValidationVM.Code, Mode=TwoWay}" Visibility="{Binding ValidationVM.IsFieldVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                     </TextBox>
                     <Button Grid.Row="2"  Margin="0 0 0 20" Background="#FAB753" Content="Надіслати код" FontSize="18" Height="40" 
                                     Command="{Binding ValidationCommand, Mode=TwoWay}"/>
                     <Button Grid.Row="2"  Background="#FAB753" Content="Продовжити реєстрацію" FontSize="18" Height="40" 
-                                    Command="{Binding SelectViewCommand, Mode=TwoWay}" CommandParameter="Registration"/>
+                                    Command="{Binding SelectViewCommand, Mode=TwoWay}" CommandParameter="Registration" Visibility="{Binding ValidationVM.IsFieldVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                     <Label Content="{Binding ValidationVM.Message, Mode=TwoWay}" Foreground="Red" FontSize="12"/>
                 </StackPanel>
             </Grid>

@@ -14,6 +14,18 @@ namespace BookWorm.ViewModel
         private string _password;
         private string _repassword;
         private string _email;
+        private bool _isFormVisibil = true;
+
+        public bool IsFormVisibil
+        {
+            get { return _isFormVisibil; }
+            set
+            {
+                _isFormVisibil = value;
+                OnPropertyChanged(nameof(IsFormVisibil));
+            }
+        }
+
 
         public string Email
         {

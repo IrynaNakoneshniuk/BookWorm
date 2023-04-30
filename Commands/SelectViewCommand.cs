@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using BookWorm.Services;
 using BookWorm.ViewModel;
-
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using BookWorm.DataAccess;
 
 namespace BookWorm.Commands
 {
     public class SelectViewCommand : AsyncCommandBase
     {
         private readonly MainVM _mainSelectorView;
-
 
         public SelectViewCommand(MainVM mainSelectorView)
         {
@@ -27,12 +23,11 @@ namespace BookWorm.Commands
             {
                 if (parameter.ToString() == "Registration")
                 {
-                   
                     if (_mainSelectorView.ValidationVM.Code == DigitCodeGenerator.ConfirmCode.ToString())
                     {
                         _mainSelectorView.IsControlAVisible = false;
-                        _mainSelectorView.SelectView = new RegistrationVM();
-                        _mainSelectorView.Email= _mainSelectorView.ValidationVM.Email;
+                        _mainSelectorView.SelectView = _mainSelectorView.Registration;
+                       
                     }
                     else
                     {
@@ -51,11 +46,11 @@ namespace BookWorm.Commands
                 }
                 else if (parameter.ToString() == "Library")
                 {
-                    _mainSelectorView.SelectView = new LibraryVM();
+                    _mainSelectorView.SelectView = _mainSelectorView.Library;
                 }
                 else if(parameter.ToString() == "Validation")
                 {
-                    _mainSelectorView.SelectView = new ValidationEmailVM();
+                    _mainSelectorView.SelectView = _mainSelectorView.ValidationVM;
                 }
             }catch(Exception ex)
             {

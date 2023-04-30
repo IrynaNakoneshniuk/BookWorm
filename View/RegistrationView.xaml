@@ -14,8 +14,8 @@
      FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="830">
-    <Grid Background="White">
-        <Grid >
+    <Grid Background="White" >
+        <Grid  >
             <materialDesign:Card>
                 <Grid >
                     <Grid.RowDefinitions>
@@ -38,8 +38,8 @@
                         <RowDefinition/>
                         <RowDefinition Height="0.1*"/>
                     </Grid.RowDefinitions>
-                    <ContentControl  Grid.Row="0" Grid.RowSpan="14" Content="{Binding SelectView,Mode=TwoWay}" Foreground="#E2FFFF"/>
-                    <Border Grid.Row="1" Grid.Column="1">
+                    <ContentControl  Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" Content="{Binding SelectView,Mode=TwoWay}" Foreground="White"/>
+                    <Border Grid.Row="1" Grid.Column="1" Visibility="{Binding Registration.IsFormVisibil, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -73,25 +73,18 @@
                        materialDesign:HintAssist.HelperText="Surname" BorderBrush="Gray"
                                      Text="{Binding Registration.Surname, Mode=TwoWay}">
                             </TextBox>
-                            <TextBox Grid.Row="5" 
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                       VerticalAlignment="Top"
-                       materialDesign:HintAssist.Hint="Електронна пошта"
-                       materialDesign:HintAssist.HelperText="E-mail" BorderBrush="Gray"
-                                     Text="{Binding Email,Mode=TwoWay}">
-                            </TextBox>
-                            <PasswordBox Grid.Row="7" 
+                            <PasswordBox Grid.Row="5" 
                             Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                            materialDesign:HintAssist.Hint="Пароль"
                            materialDesign:HintAssist.HelperText="Password" BorderBrush="Gray"
                            materialDesign:PasswordBoxAssist.Password="{Binding Registration.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" />
-                            <PasswordBox Grid.Row="9" 
+                            <PasswordBox Grid.Row="7" 
                             Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                            materialDesign:HintAssist.Hint="Повторіть пароль"
                            materialDesign:HintAssist.HelperText="Repeat password" BorderBrush="Gray"
                            materialDesign:PasswordBoxAssist.Password="{Binding Registration.Repassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" />
-                            <Button Grid.Row="11"  Background="#FAB753" Content="Реєстрація" FontSize="18" Height="40" VerticalAlignment="Top"/>
-                            <Border Grid.Row="13" >
+                            <Button Grid.Row="9"  Background="#FAB753" Content="Реєстрація" FontSize="18" Height="40" VerticalAlignment="Top" Command="{Binding RegistrationUserCommand,Mode=TwoWay}"/>
+                            <Border Grid.Row="11" >
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>

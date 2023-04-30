@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookWorm.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace BookWorm.View
     /// </summary>
     public partial class UserLoginView : UserControl
     {
+        private readonly MainVM mainVM;
         public UserLoginView()
         {
             InitializeComponent();
+            mainVM= new MainVM();
+            this.DataContext= mainVM;
         }
     }
 }

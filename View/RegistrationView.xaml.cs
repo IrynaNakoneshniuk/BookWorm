@@ -1,4 +1,5 @@
 ﻿using BookWorm.ViewModel;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BookWorm.DataAccess;
 
 namespace BookWorm.View
 {
@@ -21,7 +23,7 @@ namespace BookWorm.View
     /// </summary>
     public partial class RegistrationView : UserControl
     {
-        private readonly MainVM mainVM;
+        private  MainVM mainVM;
         public RegistrationView()
         {
             InitializeComponent();

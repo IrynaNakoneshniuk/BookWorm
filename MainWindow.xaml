@@ -79,6 +79,7 @@
                             <Separator/>
                             <MenuItem Header="Зареєструватись" Command="{Binding SelectViewCommand, Mode=TwoWay}" CommandParameter="Validation"/>
                         </MenuItem>
+                        <Label Content="{Binding Name, Mode=TwoWay}" Foreground="#36aab3"></Label>
                     </Menu>
                 </StackPanel>
             </Grid>

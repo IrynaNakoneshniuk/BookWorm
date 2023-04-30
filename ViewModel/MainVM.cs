@@ -1,34 +1,74 @@
-﻿
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using BookWorm.Commands;
+using BookWorm.ModelDB;
 
 namespace BookWorm.ViewModel
 {
-    public class MainVM: BaseVM
+    public class MainVM : BaseVM
     {
-      public ICommand SelectViewCommand { get; set; }
+        public ICommand SelectViewCommand { get; set; }
 
-      public ICommand ValidationCommand { get; set; }
+        public ICommand ValidationCommand { get; set; }
 
-      public ICommand RegistrationUserCommand { get; set; }
+        public ICommand RegistrationUserCommand { get; set; }
 
-        private bool _isControlVisibility=true;
+        public ICommand Loggin { get; set; }
 
-      private BaseVM _baseVM;
+        private bool _isControlVisibility = true;
 
-      private ValidationEmailVM _validationVM;
+        private BaseVM _baseVM;
 
-      private RegistrationVM _registrationVM;
+        private ValidationEmailVM _validationVM;
+
+        private RegistrationVM _registrationVM;
+
+        private LibraryVM _library;
+
+        private UserLoginVM _userLogin;
+
+        private Users _users;
+
+        public Users User
+        {
+            get { return _users; }
+
+            set
+            {
+                _users = value;
+                OnPropertyChanged(nameof(User));
+            }
+        }
 
         private string _email;
 
+        private string _name;
+
+        public UserLoginVM LogginUser {
+
+            get { return _userLogin; }
+
+            set
+            {
+                _userLogin = value;
+                OnPropertyChanged(nameof(LogginUser));
+            }
+        }
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
         public string Email
         {
             get { return _email; }
             set
             {
-
-                _email = value;
+                _email = _validationVM.Email;
                 OnPropertyChanged(nameof(Email));
             }
         }
@@ -44,15 +84,30 @@ namespace BookWorm.ViewModel
            }
         }
 
+        public LibraryVM Library
+        {
+            get
+            {
+                return _library;
+            }
+            set
+            {
+                _library = value;
+                OnPropertyChanged(nameof(Library));
+            }
+        }
+
         public RegistrationVM Registration
         {
             get { return _registrationVM; }
             set
             {
                 _registrationVM = value;
-                OnPropertyChanged(nameof(RegistrationVM));
+                OnPropertyChanged(nameof(Registration));
             }
         }
+
+
         public ValidationEmailVM ValidationVM
         {
             get { return _validationVM; }
@@ -68,9 +123,12 @@ namespace BookWorm.ViewModel
             this._baseVM = this;
             this._validationVM =new ValidationEmailVM();
             this._registrationVM = new RegistrationVM();
+            this._library = new LibraryVM();
+            this._userLogin = new UserLoginVM();
+            this.Loggin = new LogginCommand(this);
             this.SelectViewCommand = new SelectViewCommand(this);
             this.ValidationCommand = new ValidationEmailCommand(_validationVM);
-            this.RegistrationUserCommand = new RegistrationCommand(_registrationVM);
+            this.RegistrationUserCommand = new RegistrationCommand(this);
         }
 
         public bool IsControlAVisible

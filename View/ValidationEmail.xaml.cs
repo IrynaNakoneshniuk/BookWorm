@@ -1,7 +1,8 @@
 ﻿
 using System.Windows.Controls;
 using BookWorm.ViewModel;
-
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using BookWorm.DataAccess;
 
 namespace BookWorm.View
 {

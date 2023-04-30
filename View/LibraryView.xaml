@@ -20,6 +20,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <ContentControl  Grid.Row="0" Grid.RowSpan="3" Content="{Binding SelectView,Mode=TwoWay}" Foreground="White"/>
         <TextBox Grid.Row="0" Margin="10" Width="400" HorizontalAlignment="Left"
         Style="{StaticResource MaterialDesignOutlinedTextBox}"
         VerticalAlignment="Top"

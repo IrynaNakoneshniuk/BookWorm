@@ -11,6 +11,8 @@ namespace BookWorm.Commands
     {
         private readonly MainVM _mainSelectorView;
 
+
+
         public RegistrationCommand(MainVM registrationVM)
         {
             this._mainSelectorView = registrationVM;
@@ -20,13 +22,13 @@ namespace BookWorm.Commands
         {
             try
             {
-                if(_mainSelectorView.Registration.Password== _mainSelectorView.Registration.Repassword)
+                if (_mainSelectorView.Registration.Password == _mainSelectorView.Registration.Repassword)
                 {
                     UserAccountManager manager = new UserAccountManager();
                     _mainSelectorView.User = new Users(CurrentSession.Email, _mainSelectorView.Registration.Password,
                        _mainSelectorView.Registration.Name, _mainSelectorView.Registration.Surname);
-                   await manager.RegistrationUserAsync(_mainSelectorView.User);
-                    _mainSelectorView.Name= _mainSelectorView.Registration.Name;
+                    await manager.RegistrationUserAsync(_mainSelectorView.User);
+                    _mainSelectorView.Name = _mainSelectorView.Registration.Name;
                     _mainSelectorView.SelectView = _mainSelectorView.Library;
                     _mainSelectorView.Registration.IsFormVisibil = false;
                 }

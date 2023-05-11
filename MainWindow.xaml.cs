@@ -22,12 +22,12 @@ namespace BookWorm
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly MainVM mainVM;
-        public MainWindow()
+         private MainVM mainVM;
+         public MainWindow()
         {
             InitializeComponent();
-            mainVM= new MainVM();
-            this.DataContext = mainVM; 
+            this.mainVM = new MainVM();
+            this.DataContext = mainVM;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookWorm.ViewModel;
+using System;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -38,13 +40,14 @@ namespace BookWorm.Commands
             {
                 await ExecuteAsync(parameter);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-           
-            IsExecuting= false;
+
+            IsExecuting = false;
         }
         protected abstract Task ExecuteAsync(object? parameter);
     }
+
 }

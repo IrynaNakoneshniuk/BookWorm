@@ -17,7 +17,7 @@ namespace BookWorm.Commands
             _mainSelectorView = mainSelectorView;
         }
 
-        protected override async Task ExecuteAsync(object? parameter)
+        protected override  async Task ExecuteAsync(object? parameter)
         {
             try
             {

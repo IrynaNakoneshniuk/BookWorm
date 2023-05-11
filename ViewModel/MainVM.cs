@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.ComponentModel;
+using System.Windows.Input;
 using BookWorm.Commands;
 using BookWorm.ModelDB;
 
@@ -6,6 +8,7 @@ namespace BookWorm.ViewModel
 {
     public class MainVM : BaseVM
     {
+        public ICommand LoadLibrary { get; set; }
         public ICommand SelectViewCommand { get; set; }
 
         public ICommand ValidationCommand { get; set; }
@@ -121,10 +124,12 @@ namespace BookWorm.ViewModel
         public MainVM() {
 
             this._baseVM = this;
+            this._users = new Users(null, null, null, null);
             this._validationVM =new ValidationEmailVM();
             this._registrationVM = new RegistrationVM();
             this._library = new LibraryVM();
             this._userLogin = new UserLoginVM();
+            this.LoadLibrary = new LoadedLibraryCommad(this);
             this.Loggin = new LogginCommand(this);
             this.SelectViewCommand = new SelectViewCommand(this);
             this.ValidationCommand = new ValidationEmailCommand(_validationVM);

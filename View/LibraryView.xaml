@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="BookWorm.View.LibraryView"
+﻿<UserControl x:Class="BookWorm.View.LibraryView" 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -16,58 +16,44 @@
              d:DesignHeight="1000" d:DesignWidth="830">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*"/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
         <ContentControl  Grid.Row="0" Grid.RowSpan="3" Content="{Binding SelectView,Mode=TwoWay}" Foreground="White"/>
         <TextBox Grid.Row="0" Margin="10" Width="400" HorizontalAlignment="Left"
         Style="{StaticResource MaterialDesignOutlinedTextBox}"
         VerticalAlignment="Top"
         materialDesign:HintAssist.Hint="Введіть назву книги або автора"/>
-        <!--<StackPanel  Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
-            <Menu  VerticalAlignment="Top"
-                   Foreground="#36aab3">
-                <MenuItem>
-                    <MenuItem.Header >
-                        <StackPanel Orientation="Horizontal" >
-                            <TextBlock Text="Ірина" HorizontalAlignment="Center" Foreground="#36aab3" Margin="10"/>
-                            <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\user.png" Width="40"/>
-                        </StackPanel>
-                    </MenuItem.Header>
-                    <MenuItem Header="Увійти"/>
-                    <Separator/>
-                    <MenuItem Header="Вийти"/>
-                </MenuItem>
-            </Menu>
-        </StackPanel>-->
         <Label Content="Бібліотека" VerticalAlignment="Bottom" FontWeight="Bold"
                Foreground="Orange" FontSize="25" Margin="10"/>
-        <ListView Grid.Row="1" Margin="10">
+        <ListView x:Name="lvBook" Grid.Row="1" Margin="10" ItemsSource="{Binding Library.BooksLibrary,Mode=TwoWay}"
+                  IsHitTestVisible="True" Background="Transparent">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="20">
-                        <Border Background="White" Margin="20"  Height="200">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Image></Image>
-                                <TextBlock Grid.Row="1"></TextBlock>
-                                <materialDesign:RatingBar Grid.Row="3"
+                    <Border Background="White" Margin="20"  Height="400" CornerRadius="10" BorderThickness="1"
+                             BorderBrush="Transparent">
+                        <ScrollViewer BorderThickness="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Image Source="{Binding Url,Mode=TwoWay}" Height="200" Width="200" Margin="10"></Image>
+                            <TextBlock Grid.Row="1" Text="{Binding Title}" Width="200" HorizontalAlignment="Center"
+                                       Margin="10"></TextBlock>
+                            <materialDesign:RatingBar Grid.Row="3"
                                 x:Name="BasicRatingBar"
                                 Value="3"/>
-                                <Button
-                                Style="{StaticResource MaterialDesignFlatLightButton}"
-                                ToolTip="MaterialDesignFlatLightButton"
-                                Content="Додати"
-                                Width="{StaticResource ButtonWidth}"
-                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
-                            </Grid>
-                        </Border>
-                    </StackPanel>
+                        </Grid>
+                        </ScrollViewer>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

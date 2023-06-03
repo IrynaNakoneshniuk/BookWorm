@@ -10,8 +10,8 @@ namespace BookWorm.Commands
 {
     public class ValidationEmailCommand : AsyncCommandBase
     {
-        private readonly ValidationEmailVM _validationVM;
-        public ValidationEmailCommand(ValidationEmailVM validationVM)
+        private readonly IValidatioinEmailVM _validationVM;
+        public ValidationEmailCommand(IValidatioinEmailVM validationVM)
         {
             this._validationVM = validationVM;
         }
@@ -37,7 +37,6 @@ namespace BookWorm.Commands
                 else
                 {
                     EmailSender emailSenderemail = new EmailSender();
-                    CurrentSession.Email = _validationVM.Email;
                     string Message = $"Для підтвердження електронної пошти введіть код {DigitCodeGenerator.Generate()} ";
                     await emailSenderemail.SendAsync(_validationVM.Email, "Підтвердження електронної пошти", Message);
                     _validationVM.IsFieldVisible = true;

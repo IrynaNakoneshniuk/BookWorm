@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using BookWorm.Api;
-using BookWorm.Commands;
 using BookWorm.DataAccess;
 using BookWorm.DTO;
 using BookWorm.ViewModel;
+
 
 namespace BookWorm.Commands
 {
     public class LoadedLibraryCommad : AsyncCommandBase
     {
-        private readonly MainVM _mainSelectorView;
+        private readonly IBase _mainSelectorView;
 
-        public LoadedLibraryCommad(MainVM mainSelectorView)
+        public LoadedLibraryCommad(IBase mainSelectorView)
         {
-            _mainSelectorView = mainSelectorView;
+           this._mainSelectorView = mainSelectorView;
         }
         protected override async Task ExecuteAsync(object? parameter)
         {

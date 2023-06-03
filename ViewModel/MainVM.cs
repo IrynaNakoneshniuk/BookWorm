@@ -1,35 +1,26 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows.Input;
-using BookWorm.Commands;
+﻿using System.Windows.Input;
 using BookWorm.ModelDB;
 
 namespace BookWorm.ViewModel
 {
-    public class MainVM : BaseVM
+    public class MainVM : BaseVM, IBase
     {
-        public ICommand LoadLibrary { get; set; }
         public ICommand SelectViewCommand { get; set; }
-
-        public ICommand ValidationCommand { get; set; }
-
-        public ICommand RegistrationUserCommand { get; set; }
-
-        public ICommand Loggin { get; set; }
+        public IBase Base { get; set; }
 
         private bool _isControlVisibility = true;
 
-        private BaseVM _baseVM;
+        private IBaseVM _baseVM;
 
-        private ValidationEmailVM _validationVM;
+        private IValidatioinEmailVM _validationVM;
 
-        private RegistrationVM _registrationVM;
+        private IRegistrationVM _registrationVM;
 
-        private LibraryVM _library;
+        private ILibrary _library;
 
-        private UserLoginVM _userLogin;
+        private IUserLoginVM _userLogin;
 
-        private Users _users;
+        private static Users _users;
 
         public Users User
         {
@@ -42,11 +33,8 @@ namespace BookWorm.ViewModel
             }
         }
 
-        private string _email;
-
-        private string _name;
-
-        public UserLoginVM LogginUser {
+        public IUserLoginVM LogginUser
+        {
 
             get { return _userLogin; }
 
@@ -57,37 +45,18 @@ namespace BookWorm.ViewModel
             }
         }
 
-        public string Name
+        public IBaseVM? SelectView
         {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
-        public string Email
-        {
-            get { return _email; }
-            set
-            {
-                _email = _validationVM.Email;
-                OnPropertyChanged(nameof(Email));
-            }
-        }
-
-        public BaseVM SelectView 
-        {  
             get { return _baseVM; }
 
-           set
-           {
-               _baseVM = value;
-               OnPropertyChanged(nameof(SelectView));
-           }
+            set
+            {
+                _baseVM = value;
+                OnPropertyChanged(nameof(SelectView));
+            }
         }
 
-        public LibraryVM Library
+        public ILibrary Library
         {
             get
             {
@@ -100,7 +69,7 @@ namespace BookWorm.ViewModel
             }
         }
 
-        public RegistrationVM Registration
+        public IRegistrationVM Registration
         {
             get { return _registrationVM; }
             set
@@ -111,7 +80,7 @@ namespace BookWorm.ViewModel
         }
 
 
-        public ValidationEmailVM ValidationVM
+        public IValidatioinEmailVM ValidationVM
         {
             get { return _validationVM; }
             set
@@ -121,20 +90,6 @@ namespace BookWorm.ViewModel
             }
         }
 
-        public MainVM() {
-
-            this._baseVM = this;
-            this._users = new Users(null, null, null, null);
-            this._validationVM =new ValidationEmailVM();
-            this._registrationVM = new RegistrationVM();
-            this._library = new LibraryVM();
-            this._userLogin = new UserLoginVM();
-            this.LoadLibrary = new LoadedLibraryCommad(this);
-            this.Loggin = new LogginCommand(this);
-            this.SelectViewCommand = new SelectViewCommand(this);
-            this.ValidationCommand = new ValidationEmailCommand(_validationVM);
-            this.RegistrationUserCommand = new RegistrationCommand(this);
-        }
 
         public bool IsControlAVisible
         {
@@ -144,6 +99,17 @@ namespace BookWorm.ViewModel
                 _isControlVisibility = value;
                 OnPropertyChanged(nameof(IsControlAVisible));
             }
+        }
+
+        public MainVM(IUserLoginVM userLoginVM, ILibrary libraryVM, IRegistrationVM registrationVM,
+            IValidatioinEmailVM validatioinEmailVM)
+        {
+
+            this._baseVM = this;
+            this._validationVM = validatioinEmailVM;
+            this._registrationVM = registrationVM;
+            this._library = libraryVM;
+            this._userLogin = userLoginVM;
         }
     }
 }

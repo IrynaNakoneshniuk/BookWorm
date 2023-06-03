@@ -1,6 +1,4 @@
-﻿using BookWorm.ViewModel;
-using System;
-using System.Reflection.Metadata;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -12,9 +10,6 @@ namespace BookWorm.Commands
         public event EventHandler? CanExecuteChanged;
 
         private bool _isExecuting;
-
-        private readonly Action<Exception> _onException;
-
 
         public bool IsExecuting
         {

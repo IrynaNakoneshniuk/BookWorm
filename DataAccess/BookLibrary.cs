@@ -1,9 +1,6 @@
 ﻿using BookWorm.DTO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BookWorm.DataAccess
 {
@@ -30,6 +27,5 @@ namespace BookWorm.DataAccess
             this.Author = null;
             this.Url = null;
         }
-
     }
 }

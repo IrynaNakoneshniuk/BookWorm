@@ -53,7 +53,7 @@
                            materialDesign:HintAssist.HelperText="Password" BorderBrush="Gray"
                            materialDesign:PasswordBoxAssist.Password="{Binding LogginUser.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"/>
                     </StackPanel>
-                    <Button Grid.Row="3" Background="#FAB753" Content="Вхід" FontSize="18" Height="40" VerticalAlignment="Top" Command="{Binding Loggin,Mode=TwoWay}"/>
+                <Button Grid.Row="3" Background="#FAB753" Content="Вхід" FontSize="18" Height="40" VerticalAlignment="Top" Command="{Binding LogginUser.Loggin,Mode=TwoWay}"/>
                     <Border Grid.Row="4">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -62,7 +62,7 @@
                             </Grid.ColumnDefinitions>
                             <Button Style="{StaticResource MaterialDesignFlatSecondaryButton}" Content="Забули пароль?" Foreground="#373737" VerticalAlignment="Top" HorizontalAlignment="Left" />
                             <Button Style="{StaticResource MaterialDesignFlatSecondaryButton}" Content="Реєстрація" Foreground="#2F6891"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="1"/>
-                        <Label Content="{Binding LogginUser.Error, Mode=TwoWay}" Foreground="Red" Margin="10 30 0 0"></Label>
+                        <Label Content="{Binding LogginUser.LoError, Mode=TwoWay}" Foreground="Red" Margin="10 30 0 0"></Label>
                         </Grid>
                     </Border>
                 </Grid>

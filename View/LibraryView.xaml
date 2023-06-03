@@ -10,7 +10,7 @@
      TextElement.FontSize="13"
      TextOptions.TextFormattingMode="Ideal"
      TextOptions.TextRenderingMode="Auto"
-     Background="{DynamicResource MaterialDesignPaper}"
+     Background="#e8f5e9"
      FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="830">
@@ -20,7 +20,7 @@
             <RowDefinition/>
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
-        <ContentControl  Grid.Row="0" Grid.RowSpan="3" Content="{Binding SelectView,Mode=TwoWay}" Foreground="White"/>
+        <ContentControl  Grid.Row="0" Grid.RowSpan="3" Content="{Binding SelectView,Mode=TwoWay}" Foreground="Transparent"/>
         <TextBox Grid.Row="0" Margin="10" Width="400" HorizontalAlignment="Left"
         Style="{StaticResource MaterialDesignOutlinedTextBox}"
         VerticalAlignment="Top"
@@ -47,10 +47,11 @@
                             </Grid.RowDefinitions>
                             <Image Source="{Binding Url,Mode=TwoWay}" Height="200" Width="200" Margin="10"></Image>
                             <TextBlock Grid.Row="1" Text="{Binding Title}" Width="200" HorizontalAlignment="Center"
-                                       Margin="10"></TextBlock>
+                                       Margin="20 10 10 10"></TextBlock>
                             <materialDesign:RatingBar Grid.Row="3"
                                 x:Name="BasicRatingBar"
-                                Value="3"/>
+                                Value="3" HorizontalAlignment="Center" Margin="5"/>
+                                <Button Content="Додати" Grid.Row="2" VerticalAlignment="Bottom" Margin="25 5 3 5"  Background="Orange"></Button>
                         </Grid>
                         </ScrollViewer>
                     </Border>

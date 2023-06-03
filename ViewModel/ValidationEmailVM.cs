@@ -1,20 +1,17 @@
-﻿
-using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using BookWorm.Commands;
 
 namespace BookWorm.ViewModel
 {
-    public class ValidationEmailVM:BaseVM
+    public class ValidationEmailVM : BaseVM, IValidatioinEmailVM
     {
         public ICommand ValidationCommand { get; set; }
 
-        private string _email;
+        private static string _email;
 
         private string _code;
 
         private string _message;
-
 
         private bool _isFieldVisibility = false;
         public ValidationEmailVM()
@@ -38,11 +35,12 @@ namespace BookWorm.ViewModel
         public string Email
         {
             get { return _email; }
-            set { 
-                
+            set
+            {
+
                 _email = value;
                 OnPropertyChanged(nameof(Email));
-            
+
             }
         }
 

@@ -71,7 +71,7 @@
                                 <StackPanel Orientation="Horizontal" >
                                     <TextBlock HorizontalAlignment="Center" Foreground="#36aab3" Margin="10"/>
                                     <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\user.png" Width="40"/>
-                                    <TextBlock Text="{Binding Library.Name,Mode=TwoWay}" Foreground="#36aab3"></TextBlock>
+                                    <TextBlock Text="{Binding User.Name,Mode=TwoWay}" Foreground="#36aab3"></TextBlock>
                                 </StackPanel>
                             </MenuItem.Header>
                             <MenuItem Header="Увійти" Command="{Binding SelectViewCommand, Mode=TwoWay}" CommandParameter="Login"/>

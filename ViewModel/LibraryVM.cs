@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using BookWorm.DTO;
 using BookWorm.DataAccess;
+using System.Windows.Input;
 
 namespace BookWorm.ViewModel
 {
-    public class LibraryVM:BaseVM
+    public class LibraryVM : BaseVM, ILibrary
     {
-        
+        public ICommand LoadLibrary { get; set; }
+
         private string _name;
 
-        private List<BookLibrary> _bookslibrary;
+        private static List<BookLibrary> ?_bookslibrary;
 
         private IEnumerable<string?> _listOfImage;
 
@@ -21,8 +19,10 @@ namespace BookWorm.ViewModel
 
         public List<BookLibrary> BooksLibrary
         {
-            get { return _bookslibrary; } 
-            set { _bookslibrary = value;
+            get { return _bookslibrary; }
+            set
+            {
+                _bookslibrary = value;
                 OnPropertyChanged(nameof(BooksLibrary));
             }
         }
@@ -30,7 +30,9 @@ namespace BookWorm.ViewModel
         {
             get { return _listOfImage; }
 
-            set { _listOfImage = value;
+            set
+            {
+                _listOfImage = value;
                 OnPropertyChanged(nameof(ListOfImage));
             }
         }
@@ -38,7 +40,9 @@ namespace BookWorm.ViewModel
         {
             get { return _libraryList; }
 
-            set { _libraryList = value; 
+            set
+            {
+                _libraryList = value;
                 OnPropertyChanged(nameof(LibraryList));
             }
         }
@@ -56,8 +60,7 @@ namespace BookWorm.ViewModel
         public LibraryVM()
         {
             this._libraryList = new List<BookDto>();
-            this._listOfImage= new List<string>();
-            this._bookslibrary = new List<BookLibrary>();
+            this._listOfImage = new List<string>();
         }
     }
 }

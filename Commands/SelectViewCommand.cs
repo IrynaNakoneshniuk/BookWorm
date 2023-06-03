@@ -3,60 +3,62 @@ using System.Threading.Tasks;
 using System.Windows;
 using BookWorm.Services;
 using BookWorm.ViewModel;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using BookWorm.DataAccess;
+
 
 namespace BookWorm.Commands
 {
     public class SelectViewCommand : AsyncCommandBase
     {
-        private readonly MainVM _mainSelectorView;
+        private readonly IBase _mainSelectorView;
 
-        public SelectViewCommand(MainVM mainSelectorView)
+        public SelectViewCommand(IBase mainSelectorView)
         {
             _mainSelectorView = mainSelectorView;
         }
 
         protected override  async Task ExecuteAsync(object? parameter)
         {
-            try
+            await Task.Run(() =>
             {
-                if (parameter.ToString() == "Registration")
+                try
                 {
-                    if (_mainSelectorView.ValidationVM.Code == DigitCodeGenerator.ConfirmCode.ToString())
+                    if (parameter.ToString() == "Registration")
                     {
-                        _mainSelectorView.IsControlAVisible = false;
-                        _mainSelectorView.SelectView = _mainSelectorView.Registration;
-                       
+                        if (_mainSelectorView.ValidationVM.Code == DigitCodeGenerator.ConfirmCode.ToString())
+                        {
+                            _mainSelectorView.IsControlAVisible = false;
+                            _mainSelectorView.SelectView = _mainSelectorView.Registration;
+
+                        }
+                        else
+                        {
+                            _mainSelectorView.ValidationVM.Message = "Не вірно вказаний код!";
+                            _mainSelectorView.ValidationVM.Code = null;
+                        }
+
                     }
-                    else
+                    else if (parameter.ToString() == "Login")
                     {
-                        _mainSelectorView.ValidationVM.Message = "Не вірно вказаний код!";
-                        _mainSelectorView.ValidationVM.Code = null;
+                        _mainSelectorView.SelectView = _mainSelectorView.LogginUser;
                     }
-            
+                    else if (parameter.ToString() == "Shelf")
+                    {
+                        _mainSelectorView.SelectView = new BookShelfVM();
+                    }
+                    else if (parameter.ToString() == "Library")
+                    {
+                        _mainSelectorView.SelectView = _mainSelectorView.Library;
+                    }
+                    else if (parameter.ToString() == "Validation")
+                    {
+                        _mainSelectorView.SelectView = _mainSelectorView.ValidationVM;
+                    }
                 }
-                else if (parameter.ToString() == "Login")
+                catch (Exception ex)
                 {
-                    _mainSelectorView.SelectView = new UserLoginVM();
+                    MessageBox.Show(ex.Message);
                 }
-                else if (parameter.ToString() == "Shelf")
-                {
-                    _mainSelectorView.SelectView = new BookShelfVM();
-                }
-                else if (parameter.ToString() == "Library")
-                {
-                    _mainSelectorView.SelectView = _mainSelectorView.Library;
-                }
-                else if(parameter.ToString() == "Validation")
-                {
-                    _mainSelectorView.SelectView = _mainSelectorView.ValidationVM;
-                }
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            
+            });
         }
     }
 }

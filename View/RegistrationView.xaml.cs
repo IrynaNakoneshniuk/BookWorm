@@ -15,6 +15,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BookWorm.DataAccess;
+using BookWorm.Commands;
+using Autofac;
+using BookWorm.Services;
 
 namespace BookWorm.View
 {
@@ -23,12 +26,20 @@ namespace BookWorm.View
     /// </summary>
     public partial class RegistrationView : UserControl
     {
-        private  MainVM mainVM;
+        private readonly IBase _mainselectorVm;
         public RegistrationView()
         {
+            var container = AutofacModule.Configure();
+
+            using (var scope = container.BeginLifetimeScope())
+            {
+                this._mainselectorVm = scope.Resolve<IBase>();
+                this._mainselectorVm.Registration.RegistrationUserCommand = 
+                    scope.Resolve<RegistrationCommand>();
+            }
+
             InitializeComponent();
-            mainVM = new MainVM();
-            this.DataContext = mainVM;
+            this.DataContext = this._mainselectorVm;
         }
     }
 }

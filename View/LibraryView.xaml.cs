@@ -1,21 +1,9 @@
-﻿using BookWorm.Api;
-using BookWorm.DataAccess;
-using BookWorm.DTO;
+﻿using Autofac;
+using BookWorm.Commands;
+using BookWorm.Services;
 using BookWorm.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using CommonServiceLocator;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BookWorm.View
 {
@@ -24,13 +12,19 @@ namespace BookWorm.View
     /// </summary>
     public partial class LibraryView : UserControl
     {
-        private readonly MainVM mainVM;
-       public  LibraryView()
-       {
+        private readonly IBase _mainselectorVm;
+        public LibraryView()
+        {
+            var container = AutofacModule.Configure();
+
+            using (var scope = container.BeginLifetimeScope())
+            {
+                this._mainselectorVm = scope.Resolve<IBase>();
+                this._mainselectorVm.Library.LoadLibrary = scope.Resolve<LoadedLibraryCommad>();
+            }
+
             InitializeComponent();
-            mainVM= new MainVM();
-            mainVM.Library.BooksLibrary = CurrentView.Bookslibrary;
-            this.DataContext = mainVM;
-       }
+            this.DataContext = this._mainselectorVm;
+        }
     }
 }

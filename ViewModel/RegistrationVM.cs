@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Input;
 
 namespace BookWorm.ViewModel
 {
-   public class RegistrationVM:BaseVM
+    public class RegistrationVM : BaseVM, IRegistrationVM
     {
         private string _name;
         private string _surname;
@@ -15,7 +11,7 @@ namespace BookWorm.ViewModel
         private string _repassword;
         private string _email;
         private bool _isFormVisibil = true;
-
+        public ICommand RegistrationUserCommand { get; set; }
         public bool IsFormVisibil
         {
             get { return _isFormVisibil; }
@@ -30,8 +26,9 @@ namespace BookWorm.ViewModel
         public string Email
         {
             get { return _email; }
-            set { 
-                
+            set
+            {
+
                 _email = value;
                 OnPropertyChanged(nameof(Email));
             }
@@ -41,7 +38,8 @@ namespace BookWorm.ViewModel
         public string Repassword
         {
             get { return _repassword; }
-            set { 
+            set
+            {
 
                 _repassword = value;
                 OnPropertyChanged(nameof(Repassword));
@@ -50,9 +48,10 @@ namespace BookWorm.ViewModel
         public string Login
         {
             get { return _login; }
-            set { 
-              _login = value; 
-              OnPropertyChanged(nameof(Login));
+            set
+            {
+                _login = value;
+                OnPropertyChanged(nameof(Login));
             }
         }
 

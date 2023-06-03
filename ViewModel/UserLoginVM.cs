@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Input;
 
 namespace BookWorm.ViewModel
 {
-    public class UserLoginVM:BaseVM
+    public class UserLoginVM : BaseVM, IUserLoginVM
     {
-        private string ? _userEmail;
+        public ICommand? ValidationCommand { get; set; }
+        public ICommand? Loggin { get; set; }
+        private string? _userEmail;
 
-        private string ?  _password;
+        private string? _password;
 
         private bool _isFieldVisibil = true;
 
-        private string _error;
+        private string ?_error;
 
         public string Error
         {
             get { return _error; }
-            set { _error = value; 
+            set
+            {
+                _error = value;
                 OnPropertyChanged(nameof(Error));
             }
         }
@@ -33,9 +33,9 @@ namespace BookWorm.ViewModel
                 OnPropertyChanged(nameof(IsFieldVisibil));
             }
         }
-        public string ? UserEmail
+        public string? UserEmail
         {
-            get { return _userEmail; } 
+            get { return _userEmail; }
             set
             {
                 _userEmail = value;
@@ -44,12 +44,12 @@ namespace BookWorm.ViewModel
             }
         }
 
-        public string ? Password
+        public string? Password
         {
             get { return _password; }
             set
             {
-                _password=value;
+                _password = value;
                 OnPropertyChanged(nameof(Password));
             }
         }

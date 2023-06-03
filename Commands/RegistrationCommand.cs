@@ -5,17 +5,16 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 
+
 namespace BookWorm.Commands
 {
     public class RegistrationCommand : AsyncCommandBase
     {
-        private readonly MainVM _mainSelectorView;
+        private readonly IBase _mainSelectorView;
 
-
-
-        public RegistrationCommand(MainVM registrationVM)
+        public RegistrationCommand(IBase mainSelectorView)
         {
-            this._mainSelectorView = registrationVM;
+            this._mainSelectorView = mainSelectorView;
         }
 
         protected override async Task ExecuteAsync(object? parameter)
@@ -25,10 +24,10 @@ namespace BookWorm.Commands
                 if (_mainSelectorView.Registration.Password == _mainSelectorView.Registration.Repassword)
                 {
                     UserAccountManager manager = new UserAccountManager();
-                    _mainSelectorView.User = new Users(CurrentSession.Email, _mainSelectorView.Registration.Password,
+                    _mainSelectorView.User = new Users(_mainSelectorView.ValidationVM.Email, _mainSelectorView.Registration.Password,
                        _mainSelectorView.Registration.Name, _mainSelectorView.Registration.Surname);
                     await manager.RegistrationUserAsync(_mainSelectorView.User);
-                    _mainSelectorView.Name = _mainSelectorView.Registration.Name;
+                    _mainSelectorView.User.Name = _mainSelectorView.Registration.Name;
                     _mainSelectorView.SelectView = _mainSelectorView.Library;
                     _mainSelectorView.Registration.IsFormVisibil = false;
                 }

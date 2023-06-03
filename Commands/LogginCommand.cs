@@ -7,55 +7,45 @@ using System.Windows;
 using BookWorm.Api;
 using System.Linq;
 using System.Collections.Generic;
-using System.Windows.Input;
+using Autofac;
 
 namespace BookWorm.Commands
 {
     public class LogginCommand : AsyncCommandBase
     {
-        private readonly MainVM _mainSelectorView;
-        
-        public LogginCommand(MainVM mainSelectorView) 
+        private readonly IBase _mainSelectorView;
+        public LogginCommand(IBase mainSelectorView) 
         {
             this._mainSelectorView = mainSelectorView;
         }
 
-      
         protected override async Task ExecuteAsync(object? parameter)
         {
             UserAccountManager userAccount = new UserAccountManager();
-
+            Users user = new Users(null,null,null,null);
             try
             {
-                _mainSelectorView.User = await userAccount.SigInUserAsync(_mainSelectorView.LogginUser.UserEmail);
+                user = await userAccount.SigInUserAsync(this._mainSelectorView.LogginUser.UserEmail);
+                this._mainSelectorView.User=user;
 
-                if (_mainSelectorView.User == null)
+                if (this._mainSelectorView.User == null)
                 {
-                    _mainSelectorView.LogginUser.Error = "Користувача не знайдено!";
+                    this._mainSelectorView.LogginUser.Error = "Користувача не знайдено!";
                     return;
                 }
                 else
                 {
-                    if (_mainSelectorView.User.Password != _mainSelectorView.LogginUser.Password)
+                    if (this._mainSelectorView.User.Password != this._mainSelectorView.LogginUser.Password)
                     {
-                        _mainSelectorView.LogginUser.Error = "Невірно введено пароль!";
-                        _mainSelectorView.LogginUser.Password = null;
+                        this._mainSelectorView.LogginUser.Error = "Невірно введено пароль!";
+                        this._mainSelectorView.LogginUser.Password = null;
                         return;
                     }
                     else
                     {
-                        var list = await ApisClient.GetListBookAsync();
-                        foreach (var book in list)
-                        {
-                            string url = (from i in book.Formats
-                                          where i.Key == "image/jpeg"
-                                          select i.Value).FirstOrDefault();
-                            _mainSelectorView.Library.BooksLibrary.Add(new BookLibrary(book.Id, book.Title, book.Authors, url));
-                        }
-                        CurrentView.Bookslibrary = _mainSelectorView.Library.BooksLibrary;
-                        _mainSelectorView.SelectView = _mainSelectorView.Library;
-                        _mainSelectorView.LogginUser.IsFieldVisibil = false;
-                        _mainSelectorView.Library.Name = _mainSelectorView.User.Name;
+                       await GetLibraryAsync();
+                        this._mainSelectorView.SelectView = this._mainSelectorView.Library;
+                        this._mainSelectorView.LogginUser.IsFieldVisibil = false;
                     }
                 }
             }
@@ -63,6 +53,28 @@ namespace BookWorm.Commands
             {
                 MessageBox.Show(ex.Message);
 
+            }
+        }
+
+        protected async Task GetLibraryAsync()
+        {
+            List<BookLibrary> bookLibrary = new List<BookLibrary>();
+            try
+            {
+                var list = await ApisClient.GetListBookAsync();
+                foreach (var book in list)
+                {
+                    string ?url = (from i in book.Formats
+                                  where i.Key == "image/jpeg"
+                                  select i.Value).FirstOrDefault();
+                   bookLibrary.Add(new BookLibrary(book.Id, book.Title,
+                        book.Authors, url));
+                }
+                this._mainSelectorView.Library.BooksLibrary = bookLibrary;
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
             }
         }
     }

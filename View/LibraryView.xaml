@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookWorm.View"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:BookWorm.ViewModel" 
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
      TextElement.FontSize="13"
      TextOptions.TextFormattingMode="Ideal"
@@ -22,9 +22,16 @@
         </Grid.RowDefinitions>
         <ContentControl  Grid.Row="0" Grid.RowSpan="3" Content="{Binding SelectView,Mode=TwoWay}" Foreground="Transparent"/>
         <TextBox Grid.Row="0" Margin="10" Width="400" HorizontalAlignment="Left"
+                 Text="{Binding Library.SearchRequest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Style="{StaticResource MaterialDesignOutlinedTextBox}"
         VerticalAlignment="Top"
-        materialDesign:HintAssist.Hint="Введіть назву книги або автора"/>
+        materialDesign:HintAssist.Hint="Введіть назву книги або автора"
+                 >
+            <TextBox.InputBindings>
+                <KeyBinding  Command="{Binding Library.SearchingBooksCommand,Mode=TwoWay}" Gesture="{x:Static local:KeyGestures.KeyCommandAction1}"
+                             />
+            </TextBox.InputBindings>
+        </TextBox>
         <Label Content="Бібліотека" VerticalAlignment="Bottom" FontWeight="Bold"
                Foreground="Orange" FontSize="25" Margin="10"/>
         <ListView x:Name="lvBook" Grid.Row="1" Margin="10" ItemsSource="{Binding Library.BooksLibrary,Mode=TwoWay}"

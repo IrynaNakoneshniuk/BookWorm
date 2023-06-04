@@ -7,7 +7,7 @@ namespace BookWorm.Services
 {
     public class EmailSender
     {
-        private readonly string _smtpServer;
+        private readonly string? _smtpServer;
         private readonly int _smtpPort;
         private readonly bool _enableSsl;
 
@@ -18,7 +18,7 @@ namespace BookWorm.Services
             _enableSsl = true;
         }
 
-        public async Task SendAsync(string to, string subject, string body)
+        public async Task SendAsync(string ?to, string ?subject, string? body)
         {
             using (var client = new SmtpClient(_smtpServer, _smtpPort))
             {

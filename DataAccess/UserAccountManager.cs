@@ -10,7 +10,7 @@ namespace BookWorm.DataAccess
 {
     public class UserAccountManager
     {
-        public async Task RegistrationUserAsync(Users user)
+        public async Task RegistrationUserAsync(Users? user)
         {
             using (var db = new MyDbContext())
             {

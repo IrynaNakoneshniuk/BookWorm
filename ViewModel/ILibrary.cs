@@ -11,6 +11,8 @@ namespace BookWorm.ViewModel
         List<BookDto> LibraryList { get; set; }
         IEnumerable<string> ListOfImage { get; set; }
         ICommand LoadLibrary { get; set; }
+        ICommand SearchingBooksCommand { get; set; }
         string Name { get; set; }
+        string SearchRequest { get; set; }
     }
 }

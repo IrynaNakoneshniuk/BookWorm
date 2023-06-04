@@ -5,8 +5,8 @@ namespace BookWorm.DTO
     public class TranslationDto
     {
         [JsonProperty("text")]
-        public string Text { get; set; }
+        public string ?Text { get; set; }
         [JsonProperty("to")]
-        public string To { get; set; }
+        public string ?To { get; set; }
     }
 }

@@ -8,6 +8,9 @@ namespace BookWorm.ViewModel
     public class LibraryVM : BaseVM, ILibrary
     {
         public ICommand LoadLibrary { get; set; }
+        public ICommand SearchingBooksCommand { get; set; }
+
+        private static string _searchRequest;
 
         private string _name;
 
@@ -17,6 +20,14 @@ namespace BookWorm.ViewModel
 
         private List<BookDto> _libraryList;
 
+        public string SearchRequest
+        {
+            get { return _searchRequest; }
+            set {
+                _searchRequest = value; 
+                OnPropertyChanged(nameof(SearchRequest));
+            }
+        }
         public List<BookLibrary> BooksLibrary
         {
             get { return _bookslibrary; }

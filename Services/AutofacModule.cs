@@ -18,6 +18,7 @@ namespace BookWorm.Services
             builder.RegisterType<RegistrationCommand>();
             builder.RegisterType<SelectViewCommand>();
             builder.RegisterType<ValidationEmailCommand>();
+            builder.RegisterType<SearchingBooksCommand>();
             builder.RegisterType<ValidationEmailVM>().As<IValidatioinEmailVM>();
             builder.RegisterType<UserLoginVM>().As<IUserLoginVM>();
             builder.RegisterType<RegistrationVM>().As<IRegistrationVM>();

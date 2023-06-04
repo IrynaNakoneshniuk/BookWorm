@@ -4,6 +4,7 @@ using BookWorm.Services;
 using BookWorm.ViewModel;
 using CommonServiceLocator;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace BookWorm.View
 {
@@ -13,6 +14,7 @@ namespace BookWorm.View
     public partial class LibraryView : UserControl
     {
         private readonly IBase _mainselectorVm;
+        public static KeyGesture KeyCommandAction1 { get { return new KeyGesture(Key.Enter); } }
         public LibraryView()
         {
             var container = AutofacModule.Configure();
@@ -21,10 +23,11 @@ namespace BookWorm.View
             {
                 this._mainselectorVm = scope.Resolve<IBase>();
                 this._mainselectorVm.Library.LoadLibrary = scope.Resolve<LoadedLibraryCommad>();
-            }
+                this._mainselectorVm.Library.SearchingBooksCommand = scope.Resolve<SearchingBooksCommand>();
 
-            InitializeComponent();
-            this.DataContext = this._mainselectorVm;
+                InitializeComponent();
+                this.DataContext = this._mainselectorVm;
+            }
         }
     }
 }

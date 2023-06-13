@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookWorm.View"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:BookWorm.ViewModel" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:BookWorm.ViewModel" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" d:DataContext="{d:DesignInstance Type=viewmodel:LibraryVM}"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
      TextElement.FontSize="13"
@@ -15,18 +15,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="830">
     <Grid>
-        <Grid.RowDefinitions>
+        <ContentControl   Content="{Binding SelectView,Mode=TwoWay}" Foreground="Transparent"/>
+        <Border Background="#e8f5e9" Visibility="{Binding Library.IsFieldVisibil, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid>
+                <Grid.RowDefinitions>
             <RowDefinition Height="0.4*"/>
             <RowDefinition/>
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
-        <ContentControl  Grid.Row="0" Grid.RowSpan="3" Content="{Binding SelectView,Mode=TwoWay}" Foreground="Transparent"/>
+        
         <TextBox Grid.Row="0" Margin="10" Width="400" HorizontalAlignment="Left"
                  Text="{Binding Library.SearchRequest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Style="{StaticResource MaterialDesignOutlinedTextBox}"
         VerticalAlignment="Top"
-        materialDesign:HintAssist.Hint="Введіть назву книги або автора"
-                 >
+        materialDesign:HintAssist.Hint="Введіть назву книги або автора">
             <TextBox.InputBindings>
                 <KeyBinding  Command="{Binding Library.SearchingBooksCommand,Mode=TwoWay}" Gesture="{x:Static local:KeyGestures.KeyCommandAction1}"
                              />
@@ -34,36 +36,44 @@
         </TextBox>
         <Label Content="Бібліотека" VerticalAlignment="Bottom" FontWeight="Bold"
                Foreground="Orange" FontSize="25" Margin="10"/>
-        <ListView x:Name="lvBook" Grid.Row="1" Margin="10" ItemsSource="{Binding Library.BooksLibrary,Mode=TwoWay}"
-                  IsHitTestVisible="True" Background="Transparent">
+        <ListView  Grid.Row="1" Margin="10" ItemsSource="{Binding Library.BooksLibrary,Mode=TwoWay}"
+                  IsHitTestVisible="True" Background="Transparent" SelectedItem="{ Binding Library.SelectedBook,Mode=TwoWay}"
+                  >
+           <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged" >
+                    <i:InvokeCommandAction Command="{Binding Library.ViewBookCommand}"/>
+            </i:EventTrigger>
+            </i:Interaction.Triggers>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate  x:Name="ListView1">
                     <Border Background="White" Margin="20"  Height="400" CornerRadius="10" BorderThickness="1"
                              BorderBrush="Transparent">
+                        
                         <ScrollViewer BorderThickness="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Image Source="{Binding Url,Mode=TwoWay}" Height="200" Width="200" Margin="10"></Image>
-                            <TextBlock Grid.Row="1" Text="{Binding Title}" Width="200" HorizontalAlignment="Center"
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding Url,Mode=TwoWay}" Height="200" Width="200" Margin="10"></Image>
+                                <TextBlock Grid.Row="1" Text="{Binding Title}" Width="200" HorizontalAlignment="Center"
                                        Margin="20 10 10 10"></TextBlock>
-                            <materialDesign:RatingBar Grid.Row="3"
+                                <materialDesign:RatingBar Grid.Row="3"
                                 x:Name="BasicRatingBar"
                                 Value="3" HorizontalAlignment="Center" Margin="5"/>
-                                <Button Content="Додати" Grid.Row="2" VerticalAlignment="Bottom" Margin="25 5 3 5"  Background="Orange"></Button>
-                        </Grid>
+                            </Grid>
                         </ScrollViewer>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

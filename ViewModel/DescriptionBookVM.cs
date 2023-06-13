@@ -1,12 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BookWorm.DataAccess;
+using System.Windows.Input;
 
 namespace BookWorm.ViewModel
 {
-    public class DescriptionBooKVM:BaseVM
+    public class DescriptionBooKVM : BaseVM, IDescriptionBooKVM
     {
+        public ICommand AddToSelectedCommand { get; set; }
+        private static string _descriptionOfBook;
+        private static BookLibrary _selectedBook;
+
+        public string DescriptionOfBook
+        {
+            get { return _descriptionOfBook; }
+            set
+            {
+                _descriptionOfBook = value;
+                OnPropertyChanged(nameof(DescriptionOfBook));
+            }
+        }
+
+        public  BookLibrary SelectedBook
+        {
+            get { return _selectedBook; }
+            set
+            {
+                _selectedBook = value;
+                OnPropertyChanged(nameof(SelectedBook));
+            }
+        }
     }
 }

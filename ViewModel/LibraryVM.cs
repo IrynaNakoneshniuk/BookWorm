@@ -9,16 +9,43 @@ namespace BookWorm.ViewModel
     {
         public ICommand LoadLibrary { get; set; }
         public ICommand SearchingBooksCommand { get; set; }
+        public ICommand ViewBookCommand { get; set; }
+
+        private bool _isFieldVisibil = true;
+
+        public bool IsFieldVisibil
+        {
+            get { return _isFieldVisibil; }
+
+            set
+            {
+                _isFieldVisibil = value;
+                OnPropertyChanged(nameof(IsFieldVisibil));
+            }
+        }
+
+        private static BookLibrary _selectedBook;
 
         private static string _searchRequest;
 
         private string _name;
 
-        private static List<BookLibrary> ?_bookslibrary;
+        private static List<BookLibrary>? _bookslibrary;
 
         private IEnumerable<string?> _listOfImage;
 
         private List<BookDto> _libraryList;
+        public BookLibrary SelectedBook {
+            get
+            {
+                return _selectedBook;
+            }
+            set
+            {
+                _selectedBook = value;
+                OnPropertyChanged(nameof(SelectedBook));
+            }
+        }
 
         public string SearchRequest
         {

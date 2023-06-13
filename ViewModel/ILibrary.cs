@@ -12,7 +12,10 @@ namespace BookWorm.ViewModel
         IEnumerable<string> ListOfImage { get; set; }
         ICommand LoadLibrary { get; set; }
         ICommand SearchingBooksCommand { get; set; }
+        ICommand ViewBookCommand { get; set; }
+        BookLibrary SelectedBook { get; set; }
         string Name { get; set; }
         string SearchRequest { get; set; }
+        bool IsFieldVisibil { get; set; }
     }
 }

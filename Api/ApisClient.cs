@@ -8,14 +8,13 @@ using BookWorm.DTO;
 using System.Text;
 using UserSecrets;
 using System.Windows;
-using Azure;
+
 
 namespace BookWorm.Api
 {
     public static class ApisClient
     {
         private static readonly HttpClient _httpClient = new HttpClient();
-
 
         public static async Task<T> GetData<T>(string requestUrl)
         {

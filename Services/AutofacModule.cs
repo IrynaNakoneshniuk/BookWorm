@@ -19,10 +19,13 @@ namespace BookWorm.Services
             builder.RegisterType<SelectViewCommand>();
             builder.RegisterType<ValidationEmailCommand>();
             builder.RegisterType<SearchingBooksCommand>();
+            builder.RegisterType<DescriptionBooKVM>().As<IDescriptionBooKVM>();
             builder.RegisterType<ValidationEmailVM>().As<IValidatioinEmailVM>();
             builder.RegisterType<UserLoginVM>().As<IUserLoginVM>();
             builder.RegisterType<RegistrationVM>().As<IRegistrationVM>();
             builder.RegisterType<LibraryVM>().As<ILibrary>();
+            builder.RegisterType<BookLibrary>();
+            builder.RegisterType<ViewBookCommand>();
             return builder.Build();
         }
     }

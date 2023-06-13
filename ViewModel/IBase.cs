@@ -14,5 +14,6 @@ namespace BookWorm.ViewModel
         ICommand SelectViewCommand { get; set; }
         Users User { get; set; }
         IValidatioinEmailVM ValidationVM { get; set; }
+        IDescriptionBooKVM DescriptionBooKVm { get; set; }
     }
 }

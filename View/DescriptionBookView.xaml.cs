@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Autofac;
+using BookWorm.Commands;
+using BookWorm.Services;
+using BookWorm.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +24,17 @@ namespace BookWorm.View
     /// </summary>
     public partial class DescriptionBookView : UserControl
     {
+        private readonly IBase _mainselectorVm;
         public DescriptionBookView()
         {
-            InitializeComponent();
+            var container = AutofacModule.Configure();
+
+            using (var scope = container.BeginLifetimeScope())
+            {
+                this._mainselectorVm = scope.Resolve<IBase>();
+                InitializeComponent();
+                this.DataContext = this._mainselectorVm;
+            }
         }
     }
 }

@@ -20,7 +20,19 @@ namespace BookWorm.ViewModel
 
         private IUserLoginVM _userLogin;
 
+        private IDescriptionBooKVM _descriptionBooKVm;
+
         private static Users _users;
+
+        public IDescriptionBooKVM DescriptionBooKVm
+        {
+            get { return _descriptionBooKVm; }
+            set
+            {
+                _descriptionBooKVm=value;
+                OnPropertyChanged(nameof(DescriptionBooKVm));
+            }
+        }
 
         public Users User
         {
@@ -102,10 +114,10 @@ namespace BookWorm.ViewModel
         }
 
         public MainVM(IUserLoginVM userLoginVM, ILibrary libraryVM, IRegistrationVM registrationVM,
-            IValidatioinEmailVM validatioinEmailVM)
+            IValidatioinEmailVM validatioinEmailVM,IDescriptionBooKVM descriptionBooKVm)
         {
-
             this._baseVM = this;
+            this._descriptionBooKVm= descriptionBooKVm;
             this._validationVM = validatioinEmailVM;
             this._registrationVM = registrationVM;
             this._library = libraryVM;

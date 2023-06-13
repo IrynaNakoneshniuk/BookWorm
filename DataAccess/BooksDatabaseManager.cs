@@ -2,6 +2,8 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -54,7 +56,92 @@ namespace BookWorm.DataAccess
             }
         }
 
+        public async Task<List<Books>> GetListBooksByIdUser(int idUser)
+        {
+            List<Books> booksList = new List<Books>();
+             await Task.Run(() =>
+              {
+                  using (var db = new MyDbContext())
+                  {
+                      try
+                      {
+                          var listDB = from book in db.Books
+                                                         where book.IdUser == idUser
+                                                         select book;
+                          foreach(var book in listDB)
+                          {
+                              booksList.Add(book);
+                          }
+                      }
+                      catch (SqlException exc)
+                      {
+                          MessageBox.Show(exc.Message);
+                          
+                      }
+                  }
+            });
+            return booksList;
+        }
 
+        public async Task<List<FavoriteBooks>> GetFavoriteBooksByIdUser(int idUser)
+        {
+            List<FavoriteBooks>booksList = new List<FavoriteBooks>();
+
+            await Task.Run(() =>
+            {
+                using (var db = new MyDbContext())
+                {
+                    try
+                    {
+                        var listDB = from book in db.FavoriteBooks
+                                     where book.UserId == idUser
+                                     select book;
+                        foreach (var book in listDB)
+                        {
+                            booksList.Add(book);
+                        }
+                    }
+                    catch (SqlException exc)
+                    {
+                        MessageBox.Show(exc.Message);
+
+                    }
+                }
+            });
+
+            return booksList;
+        }
+
+        public async Task<List<ReadingBooks>> GetReadingBooksByIdUser(int idUser)
+        {
+            List< ReadingBooks> booksList = new List<ReadingBooks>();
+
+            await Task.Run(() =>
+            {
+                using (var db = new MyDbContext())
+                {
+                    try
+                    {
+                        var listDB = from book in db.ReadingBooks
+                                     where book.UserId == idUser
+                                     select book;
+                        foreach (var book in listDB)
+                        {
+                            booksList.Add(book);
+                        }
+                    }
+                    catch (SqlException exc)
+                    {
+                        MessageBox.Show(exc.Message);
+
+                    }
+                }
+            });
+            return booksList;
+        }
+
+
+        //додати видалення з пов*язаних таблиць
         public async Task DeleteBookById(int id)
         {
             using (var db = new MyDbContext())

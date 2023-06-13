@@ -32,6 +32,7 @@ namespace BookWorm.View
             using (var scope = container.BeginLifetimeScope())
             {
                 this._mainselectorVm = scope.Resolve<IBase>();
+                this._mainselectorVm.DescriptionBooKVm.AddToSelectedCommand=scope.Resolve<AddToSelectedCommand>();  
                 InitializeComponent();
                 this.DataContext = this._mainselectorVm;
             }

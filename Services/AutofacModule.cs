@@ -26,6 +26,9 @@ namespace BookWorm.Services
             builder.RegisterType<LibraryVM>().As<ILibrary>();
             builder.RegisterType<BookLibrary>();
             builder.RegisterType<ViewBookCommand>();
+            builder.RegisterType<AddToSelectedCommand>();
+            builder.RegisterType<LoadingBookShelfCommand>();
+            builder.RegisterType<BookShelfVM>().As<IBookShelfVM>();
             return builder.Build();
         }
     }

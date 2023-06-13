@@ -39,9 +39,9 @@
                     </StackPanel>
                 </Button>
                 <Button Grid.Row="2" Style="{StaticResource MaterialDesignFlatSecondaryButton}" Width="170" Height="100" Background="#CFFBFE"
-                        Margin="0 5 0 5"  Command="{Binding SelectViewCommand, Mode=TwoWay}" CommandParameter="Shelf">
+                        Margin="0 5 0 5"  Command="{Binding LoadingShelfCommand, Mode=TwoWay}" CommandParameter="Shelf">
                     <StackPanel Orientation="Vertical">
-                        <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\book.png" Height="40"/>
+                        <Image Source=".\Assets\book.png" Height="40"/>
                         <Label Content="Книжкова поличка" Foreground="#4B93B9" FontSize="14"/>
                     </StackPanel>
                 </Button>

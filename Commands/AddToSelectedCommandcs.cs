@@ -1,9 +1,9 @@
-﻿using BookWorm.ViewModel;
+﻿using BookWorm.DataAccess;
+using BookWorm.ModelDB;
+using BookWorm.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BookWorm.Commands
 {
@@ -14,11 +14,26 @@ namespace BookWorm.Commands
 
             this._mainSelectedVm= mainSelectedVm;
         }
-        protected override Task ExecuteAsync(object? parameter)
+        protected override async Task ExecuteAsync(object? parameter)
         {
-            throw new NotImplementedException();
+            BooksDatabaseManager booksDatabaseManager = new BooksDatabaseManager();
+            var selectedBook = _mainSelectedVm.DescriptionBooKVm.SelectedBook;
+            var book = new Books(selectedBook.Id.ToString(),
+                        selectedBook.Author.ToString(), selectedBook.Url, selectedBook.Title,
+                        null, _mainSelectedVm.User.Id);
+            try
+            {
+                if (selectedBook != null)
+                {
+                    await booksDatabaseManager.AddBookAsync(book);
+                    await booksDatabaseManager.AddFavouriteBook(book);
+                }
+                MessageBox.Show("Книгу додано до книжкової полички");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
-
-
     }
 }

@@ -20,59 +20,77 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <ContentControl Grid.Row="0" Grid.RowSpan="3" Content="{Binding SelectView,Mode=TwoWay}" Foreground="Transparent"/>
         <TextBox Grid.Row="0" Margin="10" Width="400" HorizontalAlignment="Left"
         Style="{StaticResource MaterialDesignOutlinedTextBox}"
         VerticalAlignment="Top"
         materialDesign:HintAssist.Hint="Введіть назву книги або автора"/>
         <Label Content="Читаю зараз" Grid.Row="1" Margin="10" FontSize="25" FontWeight="Bold" Foreground="Orange"/>
-        <ListView Grid.Row="1" Margin="10">
+        <ListView Grid.Row="1" Margin="10" ItemsSource="{Binding BookShelfVM.ReadingBooksList,Mode=TwoWay}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="20">
-                        <Border Background="White" Margin="20" Width="200" Height="200">
+                    <Border Background="White" Margin="20"  Height="400" CornerRadius="10" BorderThickness="1"
+                             BorderBrush="Transparent">
+                        <ScrollViewer BorderThickness="0">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>
-                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <Slider 
-                             Value="50"
-                             Minimum="0"
-                             Maximum="{Binding DiscreteHorizontal.Maximum}"
-                             Style="{StaticResource MaterialDesignDiscreteSlider}"
-                             TickFrequency="{Binding DiscreteHorizontal.TickFrequency}"
-                             TickPlacement="BottomRight"
-                             IsEnabled="False" />
-                                <Image Grid.Row="1"></Image>
-                                <TextBlock Grid.Row="2"></TextBlock>
+                                <Image Source="{Binding UrlImage,Mode=TwoWay}" Height="250" Width="200" Margin="10">
+                                    <Image.Effect>
+                                        <DropShadowEffect Direction="35" Color="#47667b" ShadowDepth="7" BlurRadius="5" />
+                                    </Image.Effect>
+                                </Image>
+                                <TextBlock Grid.Row="1" Text="{Binding Title}" Width="200" HorizontalAlignment="Center"
+                                       Margin="20 10 10 10" TextWrapping="Wrap" FontSize="15" VerticalAlignment="Center"></TextBlock>
                                 <materialDesign:RatingBar Grid.Row="3"
                                 x:Name="BasicRatingBar"
-                                Value="3"
-                                />
+                                Value="3" HorizontalAlignment="Center" Margin="5"/>
                             </Grid>
-                        </Border>
-                    </StackPanel>
+                        </ScrollViewer>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         <Label Content="Вибране" Grid.Row="2" Margin="10" FontSize="18" FontWeight="Bold"/>
-        <ListView Grid.Row="2" Margin="10">
+        <ListView Grid.Row="2" Margin="10" ItemsSource="{Binding BookShelfVM.SelectedBooksList, Mode=TwoWay}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="20">
-                        <Border Background="White" Margin="20" Width="200" Height="200">
+                    <Border Background="White" Margin="20"  Height="400" CornerRadius="10" BorderThickness="1"
+                             BorderBrush="Transparent">
+
+                        <ScrollViewer BorderThickness="0">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition/>
+                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <Image Grid.Row="1"></Image>
-                                <TextBlock Grid.Row="2"></TextBlock>
+                                <Image Source="{Binding UrlImage,Mode=TwoWay}" Height="250" Width="200" Margin="10">
+                                    <Image.Effect>
+                                        <DropShadowEffect Direction="35" Color="#47667b" ShadowDepth="7" BlurRadius="5" />
+                                    </Image.Effect>
+                                </Image>
+                                <TextBlock Grid.Row="1" Text="{Binding Title}" Width="200" HorizontalAlignment="Center"
+                                       Margin="20 10 10 10" TextWrapping="Wrap" FontSize="15" VerticalAlignment="Center"></TextBlock>
+                                <materialDesign:RatingBar Grid.Row="3"
+                                x:Name="BasicRatingBar"
+                                Value="3" HorizontalAlignment="Center" Margin="5"/>
                             </Grid>
-                        </Border>
-                    </StackPanel>
+                        </ScrollViewer>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

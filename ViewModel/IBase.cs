@@ -12,8 +12,10 @@ namespace BookWorm.ViewModel
         IRegistrationVM Registration { get; set; }
         IBaseVM SelectView { get; set; }
         ICommand SelectViewCommand { get; set; }
+        ICommand LoadingShelfCommand { get; set; }
         Users User { get; set; }
         IValidatioinEmailVM ValidationVM { get; set; }
         IDescriptionBooKVM DescriptionBooKVm { get; set; }
+        IBookShelfVM BookShelfVM { get; set; }
     }
 }

@@ -17,9 +17,16 @@
         </Grid.RowDefinitions>
         <ContentControl  Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding SelectView,Mode=TwoWay}" Foreground="Transparent"/>
        
-            <Image Source="{Binding DescriptionBooKVm.SelectedBook.Url}" Margin="50 50 50 70"  Width="500" Height="650"></Image>
+            <Image Source="{Binding DescriptionBooKVm.SelectedBook.Url}" Margin="50 50 50 70"  Width="500" Height="650"
+                   Grid.Row="0" Grid.RowSpan="2">
+            <Image.Effect>
+                <DropShadowEffect Direction="35" Color="#47667b" ShadowDepth="7" BlurRadius="5" />
+            </Image.Effect>
+        </Image>
 
-        <Button Grid.Row="1" Background="Orange" Margin="10,10,10,40" VerticalAlignment="Bottom" Width="300" Content="Додати до обраного"></Button>
+        <Button Grid.Row="1" Background="Orange" Margin="20 10 20 40" VerticalAlignment="Bottom" Width="400" Content="Додати до обраного"
+                Command="{Binding DescriptionBooKVm.AddToSelectedCommand,Mode=TwoWay}">
+        </Button>
         <FlowDocumentScrollViewer Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Margin="20 50 20 80">
             <FlowDocument>
                 <Paragraph>

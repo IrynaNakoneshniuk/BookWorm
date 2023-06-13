@@ -6,6 +6,8 @@ namespace BookWorm.ViewModel
     public class MainVM : BaseVM, IBase
     {
         public ICommand SelectViewCommand { get; set; }
+
+        public ICommand LoadingShelfCommand { get; set; }
         public IBase Base { get; set; }
 
         private bool _isControlVisibility = true;
@@ -21,6 +23,16 @@ namespace BookWorm.ViewModel
         private IUserLoginVM _userLogin;
 
         private IDescriptionBooKVM _descriptionBooKVm;
+
+        private IBookShelfVM _bookShelfVM;
+
+        public IBookShelfVM BookShelfVM
+        {
+            get { return _bookShelfVM; }
+            set { _bookShelfVM = value;
+            OnPropertyChanged(nameof(BookShelfVM));
+            }
+        }
 
         private static Users _users;
 
@@ -114,14 +126,15 @@ namespace BookWorm.ViewModel
         }
 
         public MainVM(IUserLoginVM userLoginVM, ILibrary libraryVM, IRegistrationVM registrationVM,
-            IValidatioinEmailVM validatioinEmailVM,IDescriptionBooKVM descriptionBooKVm)
+            IValidatioinEmailVM validatioinEmailVM,IDescriptionBooKVM descriptionBooKVm, IBookShelfVM bookShelfVM)
         {
             this._baseVM = this;
-            this._descriptionBooKVm= descriptionBooKVm;
+            this._descriptionBooKVm = descriptionBooKVm;
             this._validationVM = validatioinEmailVM;
             this._registrationVM = registrationVM;
             this._library = libraryVM;
             this._userLogin = userLoginVM;
+            this._bookShelfVM = bookShelfVM;
         }
     }
 }

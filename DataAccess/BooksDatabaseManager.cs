@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
+
 namespace BookWorm.DataAccess
 {
     public class BooksDatabaseManager
@@ -17,7 +18,7 @@ namespace BookWorm.DataAccess
             {
                 try
                 {
-                    if (!ValidateBook(book))
+                    if (!ValidateBook(book)&& await db.Books.AnyAsync(item=>item.Identificator==book.Identificator))
                     {
                         return false;
                     }
@@ -141,8 +142,7 @@ namespace BookWorm.DataAccess
         }
 
 
-        //додати видалення з пов*язаних таблиць
-        public async Task DeleteBookById(int id)
+        public async Task DeleteBookById(int? id)
         {
             using (var db = new MyDbContext())
             {
@@ -171,8 +171,15 @@ namespace BookWorm.DataAccess
                 {
                     try
                     {
-                        db.FavoriteBooks.Add(new FavoriteBooks(book.IdUser, book.Id));
-                        await db.SaveChangesAsync();
+                        if(!await db.FavoriteBooks.AnyAsync(item => item.Id == book.Id))
+                        {
+                            db.FavoriteBooks.Add(new FavoriteBooks(book.IdUser, book.Id));
+                            await db.SaveChangesAsync();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Обрана книга наявна списку!");
+                        }
                     }
                     catch (SqlException exc)
                     {
@@ -191,8 +198,15 @@ namespace BookWorm.DataAccess
                 {
                     try
                     {
-                        db.RecommendedBook.Add(new RecommendedBook(book.IdUser, book.Id));
-                        await db.SaveChangesAsync();
+                        if(!await db.RecommendedBook.AnyAsync(item => item.Id == book.Id))
+                        {
+                            db.RecommendedBook.Add(new RecommendedBook(book.IdUser, book.Id));
+                            await db.SaveChangesAsync();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Обрана книга наявна списку!");
+                        }
                     }
                     catch (SqlException exc)
                     {
@@ -211,13 +225,80 @@ namespace BookWorm.DataAccess
                 {
                     try
                     {
-                        db.ReadingBooks.Add(new ReadingBooks(book.IdUser, book.Id));
-                        await db.SaveChangesAsync();
+                        if(!await db.ReadingBooks.AnyAsync(item => item.Id == book.Id))
+                        {
+                            db.ReadingBooks.Add(new ReadingBooks(book.IdUser, book.Id));
+                            await db.SaveChangesAsync();
+                        }
+                        else{
+                            MessageBox.Show("Обрана книга наявна списку!");
+                        }
                     }
                     catch (SqlException exc)
                     {
                         MessageBox.Show(exc.Message);
                     }
+                }
+            }
+        }
+
+        public async Task DeleteBookFromFavorite(int bookId)
+        {
+            using (var db = new MyDbContext())
+            {
+                try
+                {
+                    var bookRemove = db.FavoriteBooks.FirstOrDefault(book => book.BookId == bookId);
+                    if (bookRemove != null)
+                        db.FavoriteBooks.Remove(bookRemove);
+                    await db.SaveChangesAsync();
+                }
+                catch (SqlException exc)
+                {
+                    MessageBox.Show(exc.Message);
+                }
+            }
+        }
+
+
+        public async Task EditCommentByBookId(int bookId, string comment)
+        {
+            using (var db = new MyDbContext())
+            {
+                try
+                {
+                    var book = db.Books.FirstOrDefault(book => book.Id == bookId);
+                    
+                    if (book != null)
+                    {
+                        book.Comment = comment;
+
+                        db.Books.Entry(book).State =EntityState.Modified;
+                    }
+                    await db.SaveChangesAsync();
+                }
+                catch (SqlException exc)
+                {
+                    MessageBox.Show(exc.Message);
+                }
+            }
+        }
+
+
+        public async Task DeleteBookFromReading(int bookId)
+        {
+            using (var db = new MyDbContext())
+            {
+                try
+                {
+                    var bookRemove = db.ReadingBooks.FirstOrDefault(book => book.BookId == bookId);
+                    if (bookRemove != null)
+                        db.ReadingBooks.Remove(bookRemove);
+                    await db.SaveChangesAsync();
+                }
+                catch (SqlException exc)
+                {
+                    MessageBox.Show(exc.Message);
                 }
             }
         }

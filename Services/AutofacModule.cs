@@ -29,6 +29,11 @@ namespace BookWorm.Services
             builder.RegisterType<AddToSelectedCommand>();
             builder.RegisterType<LoadingBookShelfCommand>();
             builder.RegisterType<BookShelfVM>().As<IBookShelfVM>();
+            builder.RegisterType<ReadingModeVM>().As<IReadingModeVM>();
+            builder.RegisterType<ReadingModeCommand>();
+            builder.RegisterType<RemoveFromListCommand>();
+            builder.RegisterType<AddToReadingListCommand>();
+            builder.RegisterType<EditСommentСommand>();
             return builder.Build();
         }
     }

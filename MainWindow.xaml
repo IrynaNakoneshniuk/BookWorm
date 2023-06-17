@@ -30,25 +30,25 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\logoMp.png" Width="125" Height="62.12"/>
+                <Image Source="Assets\logoMp.png" Width="125" Height="62.12"/>
                 <Button Grid.Row="1" Style="{StaticResource MaterialDesignFlatSecondaryButton}" Width="170" Height="100" Background="#CFFBFE"
                         Command="{Binding SelectViewCommand, Mode=TwoWay}" CommandParameter="Library">
                     <StackPanel Orientation="Vertical">
-                        <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\library.png" Height="53" />
+                        <Image Source="\Assets\library.png" Height="53" />
                         <Label Content="Бібліотека" FontSize="14" Foreground="#4B93B9"/>
                     </StackPanel>
                 </Button>
                 <Button Grid.Row="2" Style="{StaticResource MaterialDesignFlatSecondaryButton}" Width="170" Height="100" Background="#CFFBFE"
                         Margin="0 5 0 5"  Command="{Binding LoadingShelfCommand, Mode=TwoWay}" CommandParameter="Shelf">
                     <StackPanel Orientation="Vertical">
-                        <Image Source=".\Assets\book.png" Height="40"/>
+                        <Image Source="\Assets\book.png" Height="40"/>
                         <Label Content="Книжкова поличка" Foreground="#4B93B9" FontSize="14"/>
                     </StackPanel>
                 </Button>
                 <Button Grid.Row="3" Style="{StaticResource MaterialDesignFlatSecondaryButton}" Width="170" Height="100" Background="#CFFBFE"
                         Margin="0 5 0 5"  Command="{Binding SelectViewCommand, Mode=TwoWay}" CommandParameter="Search">
                     <StackPanel>
-                        <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\find.png" Height="40"/>
+                        <Image Source="\Assets\find.png" Height="40"/>
                         <Label Content="Пошук книги" Foreground="#4B93B9" FontSize="14"/>
                     </StackPanel>
                 </Button>
@@ -70,7 +70,7 @@
                             <MenuItem.Header >
                                 <StackPanel Orientation="Horizontal" >
                                     <TextBlock HorizontalAlignment="Center" Foreground="#36aab3" Margin="10"/>
-                                    <Image Source="C:\Users\ZbooK\source\repos\BookWorm\Assets\user.png" Width="40"/>
+                                    <Image Source="\Assets\user.png" Width="40"/>
                                     <TextBlock Text="{Binding User.Name,Mode=TwoWay}" Foreground="#36aab3"></TextBlock>
                                 </StackPanel>
                             </MenuItem.Header>

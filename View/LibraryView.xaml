@@ -50,11 +50,11 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
-                <DataTemplate  x:Name="ListView1">
-                    <Border Background="White" Margin="20"  Height="400" CornerRadius="10" BorderThickness="1"
+                        <DataTemplate  x:Name="ListView1" >
+                    <Border Background="White" Margin="20"   CornerRadius="10" BorderThickness="1"
                              BorderBrush="Transparent">
                         
-                        <ScrollViewer BorderThickness="0">
+                        <ScrollViewer BorderThickness="0" VerticalScrollBarVisibility="Hidden">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
@@ -68,7 +68,7 @@
                                         </Image>
                                 <TextBlock Grid.Row="1" Text="{Binding Title}" Width="200" HorizontalAlignment="Center"
                                        Margin="20 10 10 10" TextWrapping="Wrap" FontSize="15" VerticalAlignment="Center"></TextBlock>
-                                <materialDesign:RatingBar Grid.Row="3"
+                                <materialDesign:RatingBar Grid.Row="5"
                                 x:Name="BasicRatingBar"
                                 Value="3" HorizontalAlignment="Center" Margin="5"/>
                             </Grid>

@@ -26,6 +26,20 @@ namespace BookWorm.ViewModel
 
         private IBookShelfVM _bookShelfVM;
 
+        private IReadingModeVM _readingModeVM;
+        public IReadingModeVM ReadingModeVM
+        {
+            get
+            {
+                return _readingModeVM;
+            }
+            set
+            {
+                _readingModeVM = value;
+                OnPropertyChanged(nameof(ReadingModeVM));
+            }
+        }
+
         public IBookShelfVM BookShelfVM
         {
             get { return _bookShelfVM; }
@@ -126,7 +140,8 @@ namespace BookWorm.ViewModel
         }
 
         public MainVM(IUserLoginVM userLoginVM, ILibrary libraryVM, IRegistrationVM registrationVM,
-            IValidatioinEmailVM validatioinEmailVM,IDescriptionBooKVM descriptionBooKVm, IBookShelfVM bookShelfVM)
+            IValidatioinEmailVM validatioinEmailVM,IDescriptionBooKVM descriptionBooKVm, IBookShelfVM bookShelfVM, 
+            IReadingModeVM readingModeVM)
         {
             this._baseVM = this;
             this._descriptionBooKVm = descriptionBooKVm;
@@ -135,6 +150,7 @@ namespace BookWorm.ViewModel
             this._library = libraryVM;
             this._userLogin = userLoginVM;
             this._bookShelfVM = bookShelfVM;
+            this._readingModeVM = readingModeVM;
         }
     }
 }

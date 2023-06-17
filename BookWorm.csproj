@@ -8,7 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\book.png" />
+    <None Remove="Assets\find.png" />
+    <None Remove="Assets\library.png" />
     <None Remove="Assets\Logo.png" />
+    <None Remove="Assets\logoMp.png" />
+    <None Remove="Assets\main.jfif" />
+    <None Remove="Assets\main_img.png" />
+    <None Remove="Assets\user.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +32,16 @@
     <Reference Include="UserSecrets">
       <HintPath>..\UserSecrets\bin\Debug\net6.0\UserSecrets.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\book.png" />
+    <Resource Include="Assets\find.png" />
+    <Resource Include="Assets\library.png" />
+    <Resource Include="Assets\logoMp.png" />
+    <Resource Include="Assets\main.jfif" />
+    <Resource Include="Assets\main_img.png" />
+    <Resource Include="Assets\user.png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,5 +17,6 @@ namespace BookWorm.ViewModel
         IValidatioinEmailVM ValidationVM { get; set; }
         IDescriptionBooKVM DescriptionBooKVm { get; set; }
         IBookShelfVM BookShelfVM { get; set; }
+        IReadingModeVM ReadingModeVM { get; set; }
     }
 }

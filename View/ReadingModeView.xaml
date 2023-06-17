@@ -7,6 +7,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="AliceBlue">
-        <FlowDocumentReader></FlowDocumentReader>
+        <ContentControl   Content="{Binding SelectView,Mode=TwoWay}" Foreground="Transparent"/>
+        <Border CornerRadius="10" Background="#fdefb0">
+            <FlowDocumentScrollViewer>
+            <FlowDocument>
+                <Paragraph>
+                    <Run  Foreground="Black" FontStyle="Italic" FontSize="13"
+                         Text="{Binding ReadingModeVM.BookText,Mode=TwoWay}"></Run>
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+        </Border>
     </Grid>
 </UserControl>

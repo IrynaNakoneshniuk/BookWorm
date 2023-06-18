@@ -53,7 +53,15 @@ namespace BookWorm.Commands
             try
             {
                 List<BookLibrary> books = new List<BookLibrary>();
-                this._mainselectorVM.Library.LibraryList = await ApisClient.SearchBookAsync(query);
+                if (_mainselectorVM.Library.IsSearchingByLanguage == false)
+                {
+                    this._mainselectorVM.Library.LibraryList = await ApisClient.SearchBookAsync(query);
+                }
+                else
+                {
+                    this._mainselectorVM.Library.LibraryList = await ApisClient.GetBooksBylanguage(query);
+                }
+                
 
                 if (_mainselectorVM.Library.LibraryList.Count > 0)
                 {

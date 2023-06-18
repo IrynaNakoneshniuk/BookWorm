@@ -23,12 +23,31 @@
             <RowDefinition/>
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
-        
-        <TextBox Grid.Row="0" Margin="10" Width="400" HorizontalAlignment="Left"
+                <StackPanel Orientation="Horizontal" >
+                    <RadioButton Margin="15 5 5 5"
+                 Style="{StaticResource MaterialDesignRadioButton}"
+                 Tag="True"
+                 Content="За мовою" IsChecked="{Binding IsSearchingByLanguage,Mode=TwoWay,Converter={StaticResource BooleanToVisibilityConverter}}">
+                        
+                    </RadioButton>
+                    <RadioButton Margin="15 5 5 5"
+                 Style="{StaticResource MaterialDesignRadioButton}"
+                 Tag="True"
+                 Content="За автором/назвою">
+                        <RadioButton.IsChecked>
+                            <Binding
+                        Path="Tag"
+                        RelativeSource="{RelativeSource Self}">
+                            </Binding>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                </StackPanel>
+
+                <TextBox Grid.Row="0" Margin="10" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top"
                  Text="{Binding Library.SearchRequest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-        VerticalAlignment="Top"
-        materialDesign:HintAssist.Hint="Введіть назву книги або автора">
+        
+        materialDesign:HintAssist.Hint="Введіть запит для пошуку">
             <TextBox.InputBindings>
                 <KeyBinding  Command="{Binding Library.SearchingBooksCommand,Mode=TwoWay}" Gesture="{x:Static local:KeyGestures.KeyCommandAction1}"
                              />

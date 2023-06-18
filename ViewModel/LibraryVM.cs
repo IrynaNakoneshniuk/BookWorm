@@ -13,6 +13,21 @@ namespace BookWorm.ViewModel
 
         private bool _isFieldVisibil = true;
 
+        private static bool _isSearchingByLanguage;
+
+        public bool IsSearchingByLanguage
+        {
+            get
+            {
+                return _isSearchingByLanguage;
+            }
+            set
+            {
+                _isSearchingByLanguage = value;
+                OnPropertyChanged(nameof(IsSearchingByLanguage));
+            }
+        }
+
         public bool IsFieldVisibil
         {
             get { return _isFieldVisibil; }

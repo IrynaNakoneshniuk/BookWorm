@@ -34,6 +34,7 @@ namespace BookWorm.Services
             builder.RegisterType<RemoveFromListCommand>();
             builder.RegisterType<AddToReadingListCommand>();
             builder.RegisterType<EditСommentСommand>();
+            builder.RegisterType<TranslateWordCommand>();
             return builder.Build();
         }
     }

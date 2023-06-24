@@ -24,16 +24,19 @@ namespace BookWorm.Commands
         }
         protected async override Task ExecuteAsync(object? parameter)
         {
-            var userId = _mainSelectorVm.User.Id;
-            _listOfUsersBooks = await _booksDatabaseManager.GetListBooksByIdUser(userId);
-
-            if(_listOfUsersBooks.Count > 0)
+            if (_mainSelectorVm.User != null)
             {
-                await LoadingFavoriteBooks();
-                await LoadingReadingBooks();
-            }
+                var userId = _mainSelectorVm.User.Id;
+                _listOfUsersBooks = await _booksDatabaseManager.GetListBooksByIdUser(userId);
 
-            _mainSelectorVm.SelectView = _mainSelectorVm.BookShelfVM;
+                if (_listOfUsersBooks.Count > 0)
+                {
+                    await LoadingFavoriteBooks();
+                    await LoadingReadingBooks();
+                }
+
+                _mainSelectorVm.SelectView = _mainSelectorVm.BookShelfVM;
+            }
         }
 
         public async  Task LoadingFavoriteBooks ()

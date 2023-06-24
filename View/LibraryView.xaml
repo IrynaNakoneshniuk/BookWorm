@@ -41,6 +41,7 @@
                             </Binding>
                         </RadioButton.IsChecked>
                     </RadioButton>
+                    <Label Content="{Binding ExecutionState, Mode=TwoWay}" Foreground="LightBlue" FontStyle="Italic"></Label>
                 </StackPanel>
 
                 <TextBox Grid.Row="0" Margin="10" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -55,46 +56,65 @@
         </TextBox>
         <Label Content="Бібліотека" VerticalAlignment="Bottom" FontWeight="Bold"
                Foreground="Orange" FontSize="25" Margin="10"/>
-        <ListView  Grid.Row="1" Margin="10" ItemsSource="{Binding Library.BooksLibrary,Mode=TwoWay}"
-                  IsHitTestVisible="True" Background="Transparent" SelectedItem="{ Binding Library.SelectedBook,Mode=TwoWay}"
-                  >
-           <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged" >
-                    <i:InvokeCommandAction Command="{Binding Library.ViewBookCommand}"/>
-            </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                        <DataTemplate  x:Name="ListView1" >
-                    <Border Background="White" Margin="20"   CornerRadius="10" BorderThickness="1"
-                             BorderBrush="Transparent">
-                        
-                        <ScrollViewer BorderThickness="0" VerticalScrollBarVisibility="Hidden">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Image Source="{Binding Url,Mode=TwoWay}" Height="300" Width="300" Margin="10">
+                <ListView  Grid.Row="1" Margin="10" ItemsSource="{Binding Library.BooksLibrary,Mode=TwoWay}"
+                  IsHitTestVisible="True" Background="Transparent"
+                  x:Name="List" >
+             
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                       </ListView.ItemsPanel>
+                    
+                        <ListView.ItemTemplate>
+                        <DataTemplate  x:Name="ListView1">
+                            <ScrollViewer BorderThickness="0" VerticalScrollBarVisibility="Hidden">
+                                <Border Background="White" Margin="20"   CornerRadius="10" BorderThickness="1" Width="270"
+                             BorderBrush="Transparent" Height="350"  x:Name="MyBorder">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="0.1*"/>
+              
+                                        </Grid.RowDefinitions>
+                                        <materialDesign:PopupBox Grid.Column="0"  VerticalAlignment="Top" Margin="0 10 0 0">
+                                            <StackPanel>
+                                            <Button
+                                                    ToolTip="One"
+                                                    IsEnabled="True"
+                                                    Content="Ознайомитись"
+                                                    Command="{Binding DataContext.Library.ViewBookCommand, Mode=TwoWay, ElementName=List}"
+                                                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                AncestorType={x:Type ListViewItem}}}"
+                                                    />
+                                            <Button
+                                                    ToolTip="Two"
+                                                    IsEnabled="True"
+                                                    Content="Додати до обраного"
+                                                    Command="{Binding DataContext.Library.AddToSelectedCommand, Mode=TwoWay,ElementName=List}"
+                                                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                    AncestorType={x:Type ListViewItem}}}"
+                                               />
+                                        </StackPanel>
+                                        </materialDesign:PopupBox>
+                                        <Image Source="{Binding Url,Mode=TwoWay}" Height="300" Width="300" Margin="5 10 5 5"
+                                               Name="MyTitle">
                                             <Image.Effect>
-                                                <DropShadowEffect Direction="35" Color="#47667b" ShadowDepth="7" BlurRadius="5" />
+                                                <DropShadowEffect Direction="35" Color="#47667b" ShadowDepth="9" BlurRadius="6" />
                                             </Image.Effect>
                                         </Image>
-                                <TextBlock Grid.Row="1" Text="{Binding Title}" Width="200" HorizontalAlignment="Center"
-                                       Margin="20 10 10 10" TextWrapping="Wrap" FontSize="15" VerticalAlignment="Center"></TextBlock>
-                                <materialDesign:RatingBar Grid.Row="5"
-                                x:Name="BasicRatingBar"
-                                Value="3" HorizontalAlignment="Center" Margin="5"/>
-                            </Grid>
-                        </ScrollViewer>
-                    </Border>
-                </DataTemplate>
+                                    </Grid>
+                                </Border>
+                            </ScrollViewer>
+                            <DataTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True" SourceName="MyBorder">
+                                    <Setter TargetName="MyBorder" Property="Width" Value="350" />
+                                    <Setter TargetName="MyBorder" Property="Height" Value="370"/>
+                                </Trigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
             </ListView.ItemTemplate>
+                      
         </ListView>
             </Grid>
         </Border>

@@ -1,5 +1,4 @@
 ﻿using BookWorm.DataAccess;
-using System.Windows.Input;
 
 namespace BookWorm.ViewModel
 {
@@ -7,6 +6,5 @@ namespace BookWorm.ViewModel
     {
         string DescriptionOfBook { get; set; }
         public BookLibrary SelectedBook { get; set; }
-        ICommand AddToSelectedCommand { get; set; }
     }
 }

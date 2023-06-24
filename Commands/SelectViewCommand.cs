@@ -43,11 +43,17 @@ namespace BookWorm.Commands
                     }
                     else if (parameter.ToString() == "Shelf")
                     {
-                        _mainSelectorView.SelectView = new BookShelfVM();
+                        if (_mainSelectorView.User != null)
+                        {
+                            _mainSelectorView.SelectView = new BookShelfVM();
+                        }
                     }
                     else if (parameter.ToString() == "Library")
                     {
-                        _mainSelectorView.SelectView = _mainSelectorView.Library;
+                        if(_mainSelectorView.User != null)
+                        {
+                            _mainSelectorView.SelectView = _mainSelectorView.Library;
+                        }
                     }
                     else if (parameter.ToString() == "Validation")
                     {

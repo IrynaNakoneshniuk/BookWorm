@@ -118,7 +118,7 @@ namespace BookWorm.Api
             }
             return null;
         }
-        public static async Task<List<TranslationResultDto>> TranslateText(string text, string fromLang, string toLang)
+        public static async Task<List<TranslationResultDto>> TranslateTextAsync(string text, string fromLang, string toLang)
         {
             Object[] body = new Object[] { new { Text = text } };
             try

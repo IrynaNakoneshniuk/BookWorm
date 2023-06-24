@@ -18,5 +18,6 @@ namespace BookWorm.ViewModel
         string SearchRequest { get; set; }
         bool IsFieldVisibil { get; set; }
         bool IsSearchingByLanguage { get; set; }
+         ICommand AddToSelectedCommand { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace BookWorm.View
     /// </summary>
     public partial class LibraryView : UserControl
     {
-        private readonly IBase _mainselectorVm;
+        private readonly IBase mainselectorVm;
         public static KeyGesture KeyCommandAction1 { get { return new KeyGesture(Key.Enter); } }
         public LibraryView()
         {
@@ -22,13 +22,14 @@ namespace BookWorm.View
 
             using (var scope = container.BeginLifetimeScope())
             {
-                this._mainselectorVm = scope.Resolve<IBase>();
-                this._mainselectorVm.Library.LoadLibrary = scope.Resolve<LoadedLibraryCommad>();
-                this._mainselectorVm.Library.SearchingBooksCommand = scope.Resolve<SearchingBooksCommand>();
-                this._mainselectorVm.Library.ViewBookCommand= scope.Resolve<ViewBookCommand>();
+                this.mainselectorVm = scope.Resolve<IBase>();
+                this.mainselectorVm.Library.LoadLibrary = scope.Resolve<LoadedLibraryCommad>();
+                this.mainselectorVm.Library.SearchingBooksCommand = scope.Resolve<SearchingBooksCommand>();
+                this.mainselectorVm.Library.ViewBookCommand= scope.Resolve<ViewBookCommand>();
+                this.mainselectorVm.Library.AddToSelectedCommand= scope.Resolve<AddToSelectedCommand>();
 
                 InitializeComponent();
-                this.DataContext = this._mainselectorVm;
+                this.DataContext = this.mainselectorVm;
             }
         }
     }

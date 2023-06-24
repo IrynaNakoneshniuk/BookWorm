@@ -29,8 +29,8 @@ namespace BookWorm.Commands
 
 
         public async void Execute(object? parameter)
-        {
-            IsExecuting = true;
+        { 
+           
             try
             {
                 await ExecuteAsync(parameter);
@@ -41,6 +41,7 @@ namespace BookWorm.Commands
             }
 
             IsExecuting = false;
+           
         }
         protected abstract Task ExecuteAsync(object? parameter);
     }

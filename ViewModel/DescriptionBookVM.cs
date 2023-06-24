@@ -5,7 +5,7 @@ namespace BookWorm.ViewModel
 {
     public class DescriptionBooKVM : BaseVM, IDescriptionBooKVM
     {
-        public ICommand AddToSelectedCommand { get; set; }
+
         private static string _descriptionOfBook;
         private static BookLibrary _selectedBook;
 

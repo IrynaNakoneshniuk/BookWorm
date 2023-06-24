@@ -74,6 +74,8 @@
                                     <TextBlock Text="{Binding User.Name,Mode=TwoWay}" Foreground="#36aab3"></TextBlock>
                                 </StackPanel>
                             </MenuItem.Header>
+                            <MenuItem Header="{Binding User.Name,Mode=TwoWay}" />
+                            <Separator/>
                             <MenuItem Header="Увійти" Command="{Binding SelectViewCommand, Mode=TwoWay}" CommandParameter="Login"/>
                             <Separator/>
                             <MenuItem Header="Зареєструватись" Command="{Binding SelectViewCommand, Mode=TwoWay}" CommandParameter="Validation"/>

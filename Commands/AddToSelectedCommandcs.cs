@@ -4,6 +4,7 @@ using BookWorm.ViewModel;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace BookWorm.Commands
 {
@@ -16,14 +17,17 @@ namespace BookWorm.Commands
         }
         protected override async Task ExecuteAsync(object? parameter)
         {
-            BooksDatabaseManager booksDatabaseManager = new BooksDatabaseManager();
-            var selectedBook = _mainSelectedVm.DescriptionBooKVm.SelectedBook;
-            var book = new Books(selectedBook.Id.ToString(),
-                        selectedBook.Author.ToString(), selectedBook.Url, selectedBook.Title,
-                        null, _mainSelectedVm.User.Id);
             try
             {
-                if (selectedBook != null)
+                var selectedBook = parameter as ListViewItem;
+                BookLibrary? bookLibrary = selectedBook.Content as BookLibrary;
+                BooksDatabaseManager booksDatabaseManager = new BooksDatabaseManager();
+     
+                var book = new Books(bookLibrary.Id.ToString(),
+                        bookLibrary.Author.ToString(), bookLibrary.Url, bookLibrary.Title,
+                        null, _mainSelectedVm.User.Id);
+            
+                if (book != null)
                 {
                     await booksDatabaseManager.AddBookAsync(book);
                     await booksDatabaseManager.AddFavouriteBook(book);

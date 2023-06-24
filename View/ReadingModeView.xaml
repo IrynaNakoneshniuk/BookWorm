@@ -5,18 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookWorm.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="830">
     <Grid Background="AliceBlue">
         <ContentControl   Content="{Binding SelectView,Mode=TwoWay}" Foreground="Transparent"/>
-        <Border CornerRadius="10" Background="#fdefb0">
-            <FlowDocumentScrollViewer>
-            <FlowDocument>
-                <Paragraph>
-                    <Run  Foreground="Black" FontStyle="Italic" FontSize="13"
+        <Border Margin="10">
+            <FlowDocumentReader Margin="20" ViewingMode="TwoPage" IsFindEnabled="False" Cursor="ScrollAll" 
+                                SelectionBrush="Orange" Foreground="Blue" Padding="10">
+                <FlowDocument Background="#fdefb0">
+                    <FlowDocument.ContextMenu>
+                        <ContextMenu StaysOpen="True" Width="150">
+                            <MenuItem Header="Перекласти" StaysOpenOnClick="True"
+               Command="{Binding ReadingModeVM.TranslateWordCommand, Mode=TwoWay}"/>
+                            <ComboBox Margin="5" x:Name="fromLn" SelectedItem="{Binding ReadingModeVM.FromLanguage,Mode=TwoWay}"></ComboBox>
+                            <ComboBox Margin="5" x:Name="toLn" SelectedItem="{Binding ReadingModeVM.ToLanguage, Mode=TwoWay}"></ComboBox>
+                            <TextBox IsEnabled="False" Text="{Binding ReadingModeVM.Translate, Mode=TwoWay}"></TextBox>
+                        </ContextMenu>
+                    </FlowDocument.ContextMenu>
+                    <Paragraph>
+                        <Run  Foreground="Black" FontStyle="Italic" FontSize="17"
                          Text="{Binding ReadingModeVM.BookText,Mode=TwoWay}"></Run>
-                </Paragraph>
-            </FlowDocument>
-        </FlowDocumentScrollViewer>
+                    </Paragraph>
+                </FlowDocument>
+            </FlowDocumentReader>
         </Border>
     </Grid>
 </UserControl>

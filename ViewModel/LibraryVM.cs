@@ -10,6 +10,7 @@ namespace BookWorm.ViewModel
         public ICommand LoadLibrary { get; set; }
         public ICommand SearchingBooksCommand { get; set; }
         public ICommand ViewBookCommand { get; set; }
+        public  ICommand AddToSelectedCommand { get; set; }
 
         private bool _isFieldVisibil = true;
 

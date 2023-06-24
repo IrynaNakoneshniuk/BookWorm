@@ -1,7 +1,6 @@
 ﻿using BookWorm.ViewModel;
 using System;
 using System.Threading.Tasks;
-using BookWorm.DataAccess;
 using BookWorm.Api;
 using BookWorm.ModelDB;
 using System.Windows;
@@ -25,9 +24,20 @@ namespace BookWorm.Commands
                 var identificator = book.Identificator;
                 if (identificator != null)
                 {
-                    this._mainSelectorVm.ReadingModeVM.BookText = await ApisClient.GetBookTextAsync(identificator);
-                    _mainSelectorVm.BookShelfVM.IsVisibil = false;
-                    this._mainSelectorVm.SelectView = _mainSelectorVm.ReadingModeVM;
+                    string? bookText = await ApisClient.GetBookTextAsync(identificator);
+                    if (bookText != null)
+                    {
+                        if (bookText.Split("CONTENTS").Length > 1)
+                        {
+                            this._mainSelectorVm.ReadingModeVM.BookText = bookText.Split("CONTENTS")[1];
+                        }
+                        else
+                        {
+                            this._mainSelectorVm.ReadingModeVM.BookText = bookText;
+                        }
+                        _mainSelectorVm.BookShelfVM.IsVisibil = false;
+                        this._mainSelectorVm.SelectView = _mainSelectorVm.ReadingModeVM;
+                    }
                 }
             }catch(Exception ex)
             {

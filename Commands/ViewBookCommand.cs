@@ -1,11 +1,10 @@
 ﻿using BookWorm.Api;
+using BookWorm.DataAccess;
 using BookWorm.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace BookWorm.Commands
 {
@@ -21,12 +20,23 @@ namespace BookWorm.Commands
         {
             try
             {
-                if (this._mainSelelectorVm.Library.SelectedBook != null)
+                var selectedBook = parameter as ListViewItem;
+                BookLibrary bookLibrary = selectedBook.Content as BookLibrary;
+                
+
+                if (bookLibrary != null)
                 {
-                    this._mainSelelectorVm.DescriptionBooKVm.SelectedBook =
-                   this._mainSelelectorVm.Library.SelectedBook;
-                    this._mainSelelectorVm.DescriptionBooKVm.DescriptionOfBook =
-                        await ApisClient.GetBookTextAsync(this._mainSelelectorVm.DescriptionBooKVm.SelectedBook.Id.ToString());
+                    this._mainSelelectorVm.DescriptionBooKVm.SelectedBook = bookLibrary;    
+                    string ? bookText = await ApisClient.GetBookTextAsync(bookLibrary.Id.ToString());
+                    if (bookText.Split("CONTENTS").Length > 1)
+                    {
+                        this._mainSelelectorVm.DescriptionBooKVm.DescriptionOfBook = bookText.Split("CONTENTS")[1];
+                    }
+                    else
+                    {
+                        this._mainSelelectorVm.DescriptionBooKVm.DescriptionOfBook = bookText;
+                    }
+                    
                     this._mainSelelectorVm.Library.IsFieldVisibil = false;
                     this._mainSelelectorVm.SelectView = this._mainSelelectorVm.DescriptionBooKVm;
                 }

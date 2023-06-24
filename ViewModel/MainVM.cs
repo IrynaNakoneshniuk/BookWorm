@@ -7,6 +7,8 @@ namespace BookWorm.ViewModel
     {
         public ICommand SelectViewCommand { get; set; }
 
+        private static string _executionState;
+
         public ICommand LoadingShelfCommand { get; set; }
         public IBase Base { get; set; }
 
@@ -27,6 +29,16 @@ namespace BookWorm.ViewModel
         private IBookShelfVM _bookShelfVM;
 
         private IReadingModeVM _readingModeVM;
+
+        public string ExecutionState
+        {
+            get { return _executionState; }
+            set { 
+                _executionState = value;
+                OnPropertyChanged(nameof(ExecutionState));
+            }
+        }
+
         public IReadingModeVM ReadingModeVM
         {
             get

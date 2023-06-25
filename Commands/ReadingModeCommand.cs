@@ -21,7 +21,9 @@ namespace BookWorm.Commands
             {
                 var selectedBook = parameter as ListViewItem;
                 Books? book = selectedBook?.Content as Books;
+
                 var identificator = book?.Identificator;
+
                 if (identificator != null)
                 {
                     string? bookText = await ApisClient.GetBookTextAsync(identificator);
@@ -30,6 +32,10 @@ namespace BookWorm.Commands
                         if (bookText.Split("CONTENTS").Length > 1)
                         {
                             this._mainSelectorVm.ReadingModeVM.BookText = bookText.Split("CONTENTS")[1];
+                        }
+                        else if(bookText.Split("***").Length > 1)
+                        {
+                            this._mainSelectorVm.ReadingModeVM.BookText = bookText.Split("***")[2];
                         }
                         else
                         {

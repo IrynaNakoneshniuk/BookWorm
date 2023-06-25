@@ -34,7 +34,7 @@ namespace BookWorm.Api
                 MessageBox.Show(ex.Message);
             }
 
-            return null;
+            throw new Exception("No data found");
         }
 
 

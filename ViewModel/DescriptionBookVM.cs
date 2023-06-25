@@ -1,13 +1,13 @@
 ﻿using BookWorm.DataAccess;
-using System.Windows.Input;
 
 namespace BookWorm.ViewModel
 {
     public class DescriptionBooKVM : BaseVM, IDescriptionBooKVM
     {
 
-        private static string _descriptionOfBook;
-        private static BookLibrary _selectedBook;
+        private static string ? _descriptionOfBook;
+
+        private static BookLibrary ? _selectedBook;
 
         public string DescriptionOfBook
         {

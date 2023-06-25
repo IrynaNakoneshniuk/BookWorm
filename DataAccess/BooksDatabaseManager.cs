@@ -18,7 +18,10 @@ namespace BookWorm.DataAccess
             {
                 try
                 {
-                    if (!ValidateBook(book)&& await db.Books.AnyAsync(item=>item.Identificator==book.Identificator))
+                    var selectedBook = await (from item in db.Books
+                                       where item.Identificator == book.Identificator
+                                       select item).FirstOrDefaultAsync();
+                    if (!ValidateBook(book)|| selectedBook!=null)
                     {
                         return false;
                     }
@@ -57,6 +60,7 @@ namespace BookWorm.DataAccess
             }
         }
 
+
         public async Task<List<Books>> GetListBooksByIdUser(int idUser)
         {
             List<Books> booksList = new List<Books>();
@@ -83,6 +87,7 @@ namespace BookWorm.DataAccess
             });
             return booksList;
         }
+
 
         public async Task<List<FavoriteBooks>> GetFavoriteBooksByIdUser(int idUser)
         {
@@ -112,6 +117,7 @@ namespace BookWorm.DataAccess
 
             return booksList;
         }
+
 
         public async Task<List<ReadingBooks>> GetReadingBooksByIdUser(int idUser)
         {
@@ -171,10 +177,16 @@ namespace BookWorm.DataAccess
                 {
                     try
                     {
-                        if(!await db.FavoriteBooks.AnyAsync(item => item.Id == book.Id))
+                        var bookForreading = new FavoriteBooks(book.IdUser, book.Id);
+
+                        var selectedBook = (from selectBook in db.FavoriteBooks
+                                            where selectBook.BookId == book.Id
+                                            select selectBook).FirstOrDefault();
+                        if (selectedBook == null)
                         {
-                            db.FavoriteBooks.Add(new FavoriteBooks(book.IdUser, book.Id));
+                            db.FavoriteBooks.Add(bookForreading);
                             await db.SaveChangesAsync();
+                            MessageBox.Show("Книгу додано до списку!");
                         }
                         else
                         {
@@ -198,10 +210,16 @@ namespace BookWorm.DataAccess
                 {
                     try
                     {
-                        if(!await db.RecommendedBook.AnyAsync(item => item.Id == book.Id))
+                        var bookForreading = new RecommendedBook(book.IdUser, book.Id);
+
+                        var selectedBook = (from selectBook in db.RecommendedBook
+                                            where selectBook.BookId == book.Id
+                                            select selectBook).FirstOrDefault();
+                        if (selectedBook == null)
                         {
-                            db.RecommendedBook.Add(new RecommendedBook(book.IdUser, book.Id));
+                            db.RecommendedBook.Add(bookForreading);
                             await db.SaveChangesAsync();
+                            MessageBox.Show("Книгу додано до списку!");
                         }
                         else
                         {
@@ -225,10 +243,16 @@ namespace BookWorm.DataAccess
                 {
                     try
                     {
-                        if(!await db.ReadingBooks.AnyAsync(item => item.Id == book.Id))
+                        var bookForreading = new ReadingBooks(book.IdUser, book.Id);
+
+                        var selectedBook = (from selectBook in db.ReadingBooks
+                                           where selectBook.BookId== book.Id
+                                            select selectBook).FirstOrDefault();
+                        if (selectedBook==null)
                         {
-                            db.ReadingBooks.Add(new ReadingBooks(book.IdUser, book.Id));
+                            db.ReadingBooks.Add(bookForreading);
                             await db.SaveChangesAsync();
+                            MessageBox.Show("Книгу додано до списку!");
                         }
                         else{
                             MessageBox.Show("Обрана книга наявна списку!");
@@ -241,6 +265,7 @@ namespace BookWorm.DataAccess
                 }
             }
         }
+
 
         public async Task DeleteBookFromFavorite(int bookId)
         {

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BookWorm.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="830">
-    <Grid Background="AliceBlue">
+    <Grid Background="#fafafa">
         <ContentControl   Content="{Binding SelectView,Mode=TwoWay}" Foreground="Transparent"/>
         <Border Margin="10">
             <FlowDocumentReader Margin="20" ViewingMode="TwoPage" IsFindEnabled="False" Cursor="ScrollAll" 

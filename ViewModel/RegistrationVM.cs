@@ -4,14 +4,20 @@ namespace BookWorm.ViewModel
 {
     public class RegistrationVM : BaseVM, IRegistrationVM
     {
-        private string _name;
-        private string _surname;
-        private string _login;
-        private string _password;
-        private string _repassword;
-        private string _email;
+        private string ? _name;
+
+        private string ? _surname;
+
+        private string ?_login;
+
+        private string ? _password;
+
+        private string ? _repassword;
+
+        private string ? _email;
+
         private bool _isFormVisibil = true;
-        public ICommand RegistrationUserCommand { get; set; }
+        public ICommand ? RegistrationUserCommand { get; set; }
         public bool IsFormVisibil
         {
             get { return _isFormVisibil; }

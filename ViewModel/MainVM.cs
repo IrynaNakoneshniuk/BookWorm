@@ -6,8 +6,11 @@ namespace BookWorm.ViewModel
     public class MainVM : BaseVM, IBase
     {
         public ICommand SelectViewCommand { get; set; }
+        public ICommand ExitCommand { get; set; }
 
-        private static string _executionState;
+        private static string ? _executionState;
+
+        private static Users _users;
 
         public ICommand LoadingShelfCommand { get; set; }
         public IBase Base { get; set; }
@@ -60,7 +63,6 @@ namespace BookWorm.ViewModel
             }
         }
 
-        private static Users _users;
 
         public IDescriptionBooKVM DescriptionBooKVm
         {

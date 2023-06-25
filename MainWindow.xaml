@@ -31,25 +31,18 @@
                 </Grid.RowDefinitions>
 
                 <Image Source="Assets\logoMp.png" Width="125" Height="62.12"/>
-                <Button Grid.Row="1" Style="{StaticResource MaterialDesignFlatSecondaryButton}" Width="170" Height="100" Background="#CFFBFE"
+                <Button Grid.Row="2" Style="{StaticResource MaterialDesignFlatSecondaryButton}" Width="170" Height="100" Background="#CFFBFE"
                         Command="{Binding SelectViewCommand, Mode=TwoWay}" CommandParameter="Library">
                     <StackPanel Orientation="Vertical">
                         <Image Source="\Assets\library.png" Height="53" />
                         <Label Content="Бібліотека" FontSize="14" Foreground="#4B93B9"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="2" Style="{StaticResource MaterialDesignFlatSecondaryButton}" Width="170" Height="100" Background="#CFFBFE"
+                <Button Grid.Row="3" Style="{StaticResource MaterialDesignFlatSecondaryButton}" Width="170" Height="100" Background="#CFFBFE"
                         Margin="0 5 0 5"  Command="{Binding LoadingShelfCommand, Mode=TwoWay}" CommandParameter="Shelf">
                     <StackPanel Orientation="Vertical">
                         <Image Source="\Assets\book.png" Height="40"/>
                         <Label Content="Книжкова поличка" Foreground="#4B93B9" FontSize="14"/>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Row="3" Style="{StaticResource MaterialDesignFlatSecondaryButton}" Width="170" Height="100" Background="#CFFBFE"
-                        Margin="0 5 0 5"  Command="{Binding SelectViewCommand, Mode=TwoWay}" CommandParameter="Search">
-                    <StackPanel>
-                        <Image Source="\Assets\find.png" Height="40"/>
-                        <Label Content="Пошук книги" Foreground="#4B93B9" FontSize="14"/>
                     </StackPanel>
                 </Button>
             </Grid>
@@ -74,11 +67,13 @@
                                     <TextBlock Text="{Binding User.Name,Mode=TwoWay}" Foreground="#36aab3"></TextBlock>
                                 </StackPanel>
                             </MenuItem.Header>
-                            <MenuItem Header="{Binding User.Name,Mode=TwoWay}" />
+                            <MenuItem Header="{Binding User.Name,Mode=TwoWay}" Foreground="#36aab3"/>
                             <Separator/>
                             <MenuItem Header="Увійти" Command="{Binding SelectViewCommand, Mode=TwoWay}" CommandParameter="Login"/>
                             <Separator/>
                             <MenuItem Header="Зареєструватись" Command="{Binding SelectViewCommand, Mode=TwoWay}" CommandParameter="Validation"/>
+                            <Separator/>
+                            <MenuItem Header="Вийти" Command="{Binding ExitCommand, Mode=TwoWay}"/>
                         </MenuItem>
                     </Menu>
                 </StackPanel>

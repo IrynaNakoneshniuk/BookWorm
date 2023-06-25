@@ -21,6 +21,7 @@ namespace BookWorm
                 this._mainselectorVm = scope.Resolve<IBase>();
                 this._mainselectorVm.SelectViewCommand= new SelectViewCommand(this._mainselectorVm);
                 this._mainselectorVm.LoadingShelfCommand = scope.Resolve<LoadingBookShelfCommand>();
+                this._mainselectorVm.ExitCommand=scope.Resolve<ExitCommand>();
             }
 
             InitializeComponent();

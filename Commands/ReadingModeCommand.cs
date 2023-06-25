@@ -20,8 +20,8 @@ namespace BookWorm.Commands
             try
             {
                 var selectedBook = parameter as ListViewItem;
-                Books? book = selectedBook.Content as Books;
-                var identificator = book.Identificator;
+                Books? book = selectedBook?.Content as Books;
+                var identificator = book?.Identificator;
                 if (identificator != null)
                 {
                     string? bookText = await ApisClient.GetBookTextAsync(identificator);

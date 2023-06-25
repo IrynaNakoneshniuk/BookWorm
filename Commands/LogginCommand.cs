@@ -31,6 +31,8 @@ namespace BookWorm.Commands
                 if (this._mainSelectorView.User == null)
                 {
                     this._mainSelectorView.LogginUser.Error = "Користувача не знайдено!";
+                    this._mainSelectorView.LogginUser.UserEmail = null;
+                    this._mainSelectorView.LogginUser.Password= null;
                     return;
                 }
                 else
@@ -43,7 +45,7 @@ namespace BookWorm.Commands
                     }
                     else
                     {
-                       await GetLibraryAsync();
+                        await GetLibraryAsync();
                         this._mainSelectorView.SelectView = this._mainSelectorView.Library;
                         this._mainSelectorView.LogginUser.IsFieldVisibil = false;
                     }

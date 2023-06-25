@@ -4,15 +4,16 @@ namespace BookWorm.ViewModel
 {
     public class UserLoginVM : BaseVM, IUserLoginVM
     {
-        public ICommand? ValidationCommand { get; set; }
-        public ICommand? Loggin { get; set; }
-        private string? _userEmail;
+        public ICommand ? ValidationCommand { get; set; }
+        public ICommand ? Loggin { get; set; }
 
-        private string? _password;
+        private string ? _userEmail;
+
+        private string ? _password;
 
         private bool _isFieldVisibil = true;
 
-        private string ?_error;
+        private string ? _error;
 
         public string Error
         {
@@ -33,7 +34,7 @@ namespace BookWorm.ViewModel
                 OnPropertyChanged(nameof(IsFieldVisibil));
             }
         }
-        public string? UserEmail
+        public string UserEmail
         {
             get { return _userEmail; }
             set
@@ -44,7 +45,7 @@ namespace BookWorm.ViewModel
             }
         }
 
-        public string? Password
+        public string Password
         {
             get { return _password; }
             set

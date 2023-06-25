@@ -10,19 +10,21 @@
      TextElement.FontSize="13"
      TextOptions.TextFormattingMode="Ideal"
      TextOptions.TextRenderingMode="Auto"
-     Background="#e8f5e9"
+     Background="#E2FFFF"
      FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="830">
     <Grid>
         <ContentControl   Content="{Binding SelectView,Mode=TwoWay}" Foreground="Transparent"/>
-        <Border Background="#e8f5e9" Visibility="{Binding Library.IsFieldVisibil, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Border  Visibility="{Binding Library.IsFieldVisibil, Converter={StaticResource BooleanToVisibilityConverter}}"
+              Background="#fafafa" >
+           
             <Grid>
                 <Grid.RowDefinitions>
-            <RowDefinition Height="0.4*"/>
-            <RowDefinition/>
-            <RowDefinition Height="0.2*"/>
-        </Grid.RowDefinitions>
+                    <RowDefinition Height="0.4*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.2*"/>
+                </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" >
                     <RadioButton Margin="15 5 5 5"
                  Style="{StaticResource MaterialDesignRadioButton}"

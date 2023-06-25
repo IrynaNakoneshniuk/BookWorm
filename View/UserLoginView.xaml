@@ -62,7 +62,7 @@
                             </Grid.ColumnDefinitions>
                             <Button Style="{StaticResource MaterialDesignFlatSecondaryButton}" Content="Забули пароль?" Foreground="#373737" VerticalAlignment="Top" HorizontalAlignment="Left" />
                             <Button Style="{StaticResource MaterialDesignFlatSecondaryButton}" Content="Реєстрація" Foreground="#2F6891"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="1"/>
-                        <Label Content="{Binding LogginUser.LoError, Mode=TwoWay}" Foreground="Red" Margin="10 30 0 0"></Label>
+                        <Label Content="{Binding LogginUser.Error, Mode=TwoWay}" Foreground="Red" Margin="10 30 0 0"></Label>
                         </Grid>
                     </Border>
                 </Grid>

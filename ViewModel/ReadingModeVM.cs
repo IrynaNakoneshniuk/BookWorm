@@ -4,11 +4,15 @@ namespace BookWorm.ViewModel
 {
     public class ReadingModeVM : BaseVM, IReadingModeVM
     {
-        private static string _bookText;
-        private static string _nightModeReading;
-        private string _fromLanguage;
-        private string _toLanguage;
-        private string _translate;
+        private static string ? _bookText;
+
+        private static string ? _nightModeReading;
+
+        private string ? _fromLanguage;
+
+        private string ? _toLanguage;
+
+        private string ? _translate;
 
         public string Translate
         {

@@ -34,29 +34,12 @@ namespace BookWorm.Api
                 MessageBox.Show(ex.Message);
             }
 
-            throw new Exception("No data found");
+            return null;
         }
 
 
         public static async Task<List<BookDto>> SearchBookAsync(string query)
         {
-            //try
-            //{
-            //    var apiUrl = EndPointApi.GetBaseUrlGuenbergApi() + EndPointApi.FilterByAuthorOrTitle(query);
-            //    var response = await _httpClient.GetAsync(apiUrl);
-
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        var content = await response.Content.ReadAsStringAsync();
-            //        BookDto result = JsonConvert.DeserializeObject<BookDto>(content);
-            //        return result;
-            //    }
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-            //return null;
             try
             {
                 return await GetData<List<BookDto>>(EndPointApi.GetBaseUrlGuenbergApi() 
@@ -66,7 +49,7 @@ namespace BookWorm.Api
             {
                 MessageBox.Show(ex.Message);
             }
-            throw new Exception("Не вдалось виконати пошук");
+            return null;
         }
 
 
@@ -80,7 +63,7 @@ namespace BookWorm.Api
             {
                 MessageBox.Show(ex.Message);
             }
-            throw new Exception("Не вдалось виконати пошук");
+            return null;
         }
 
 
@@ -101,7 +84,7 @@ namespace BookWorm.Api
                 MessageBox.Show(ex.Message);
 
             }
-            throw new Exception($"Не вдалося отримати текст книги");
+            return null;
         }
 
 
@@ -140,8 +123,7 @@ namespace BookWorm.Api
             {
                 MessageBox.Show(ex.Message);
             }
-
-            throw new Exception($"Не вдалося перекласти текст");
+            return null;
         }
     }
 }

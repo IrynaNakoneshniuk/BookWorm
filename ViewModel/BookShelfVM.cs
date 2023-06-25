@@ -6,13 +6,17 @@ namespace BookWorm.ViewModel
 {
     public class BookShelfVM : BaseVM, IBookShelfVM
     {
-        private static List<Books> _selectedBooksList;
+        private static List<Books> ?_selectedBooksList;
 
-        private static List<Books> _readingBooksList;
+        private static List<Books> ? _readingBooksList;
 
-        private static Books _selectedBook;
+        private static Books ? _selectedBook;
 
         private bool _isVisibil = true;
+        public ICommand ? ReadingModeCommand { get; set; }
+        public ICommand ? RemoveFromListCommand { get; set; }
+        public ICommand ? AddToReadingListCommand { get; set; }
+        public ICommand ? EditCommentCommand { get; set; }
 
         public bool IsVisibil
         {
@@ -34,11 +38,7 @@ namespace BookWorm.ViewModel
             }
         }
 
-        public ICommand ReadingModeCommand { get; set; }
-        public ICommand RemoveFromListCommand { get; set; }
-        public ICommand AddToReadingListCommand { get; set; }
-        public ICommand EditCommentCommand { get; set; }
-
+       
         public List<Books> SelectedBooksList
         {
             get { return _selectedBooksList; }

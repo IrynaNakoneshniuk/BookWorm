@@ -11,7 +11,7 @@
      TextElement.FontSize="13"
      TextOptions.TextFormattingMode="Ideal"
      TextOptions.TextRenderingMode="Auto"
-     Background="{DynamicResource MaterialDesignPaper}"
+             Background="#fafafa"
      FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="1000" d:DesignWidth="830">
     <Grid>
@@ -25,7 +25,7 @@
 
                 <Label Content="Читаю зараз" Grid.Row="0" Margin="10" FontSize="25" FontWeight="Bold" Foreground="Orange"/>
         <ListView Grid.Row="0" Margin="10" ItemsSource="{Binding BookShelfVM.ReadingBooksList,Mode=TwoWay}"
-                   x:Name="List" Height="400" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                   x:Name="ListReading" Height="400" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible">
                  
                         <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -51,7 +51,7 @@
                                             <DropShadowEffect Direction="35" Color="#47667b" ShadowDepth="7" BlurRadius="5" />
                                         </Image.Effect>
                                     </Image>
-                                    <materialDesign:PopupBox Grid.Column="0"  VerticalAlignment="Top" Margin="0 10 0 0">
+                                    <materialDesign:PopupBox Grid.Column="0"  VerticalAlignment="Top">
                                         <materialDesign:PopupBox.ToggleCheckedContent>
                                             <materialDesign:PackIcon
                                                     Kind="Pencil"
@@ -63,7 +63,7 @@
                                                     ToolTip="One"
                                                     IsEnabled="True"
                                                     Content="Читати"
-                                                    Command="{Binding DataContext.BookShelfVM.ReadingModeCommand, Mode=TwoWay,ElementName=List}"
+                                                    Command="{Binding DataContext.BookShelfVM.ReadingModeCommand, Mode=TwoWay,ElementName=ListReading}"
                                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                                 AncestorType={x:Type ListViewItem}}}"
                                                     />
@@ -71,7 +71,7 @@
                                                     ToolTip="Two"
                                                     IsEnabled="True"
                                                     Content="Видалити"
-                                                    Command="{Binding DataContext.BookShelfVM.RemoveFromListCommand, Mode=TwoWay,ElementName=List}"
+                                                    Command="{Binding DataContext.BookShelfVM.RemoveFromListCommand, Mode=TwoWay,ElementName=ListReading}"
                                                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                                     AncestorType={x:Type ListViewItem}}}"/>
                                         </StackPanel>
@@ -89,7 +89,7 @@
                                              Width="170" Height="28"
                                              IsEnabled="True"
                                                     Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                                                  Command="{Binding  DataContext.BookShelfVM.EditCommentCommand,Mode=TwoWay, ElementName=List}" 
+                                                  Command="{Binding  DataContext.BookShelfVM.EditCommentCommand,Mode=TwoWay, ElementName=ListReading}" 
                                                                  CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                                     AncestorType={x:Type ListViewItem}}}">
                                             <materialDesign:PackIcon Kind="PencilOutline" />
@@ -106,7 +106,7 @@
                 </ListView>
         <Label Content="Вибране" Grid.Row="2" Margin="20" FontSize="18" FontWeight="Bold"/>
         <ListView Grid.Row="2" Margin="10" ItemsSource="{Binding BookShelfVM.SelectedBooksList, Mode=TwoWay}"
-                  SelectedItem="{Binding BookShelfVM.SelectedBook, Mode=TwoWay}" Height="320">
+                  SelectedItem="{Binding BookShelfVM.SelectedBook, Mode=TwoWay}" Height="320" x:Name="ListSelected">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged" >
                     <i:InvokeCommandAction Command="{Binding BookShelfVM.ReadingModeCommand, Mode=TwoWay}"/>
@@ -136,20 +136,20 @@
                                                 <Button
                                                     IsEnabled="True"
                                                     Content="Читати"
-                                                    Command="{Binding DataContext.BookShelfVM.ReadingModeCommand, Mode=TwoWay,ElementName=List}"
+                                                    Command="{Binding DataContext.BookShelfVM.ReadingModeCommand, Mode=TwoWay,ElementName=ListSelected}"
                                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                                 AncestorType={x:Type ListViewItem}}}"
                                                     />
                                                 <Button
                                                     IsEnabled="True"
                                                     Content="Видалити"
-                                                    Command="{Binding DataContext.BookShelfVM.RemoveFromListCommand, Mode=TwoWay,ElementName=List}"
+                                                    Command="{Binding DataContext.BookShelfVM.RemoveFromListCommand, Mode=TwoWay,ElementName=ListSelected}"
                                                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                                     AncestorType={x:Type ListViewItem}}}"/>
                                                 <Button
                                                     IsEnabled="True"
                                                     Content="Додати в список для прочитання"
-                                                    Command="{Binding DataContext.BookShelfVM.AddToReadingListCommand, Mode=TwoWay,ElementName=List}"
+                                                    Command="{Binding DataContext.BookShelfVM.AddToReadingListCommand, Mode=TwoWay,ElementName=ListSelected}"
                                                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                                     AncestorType={x:Type ListViewItem}}}"/>
 

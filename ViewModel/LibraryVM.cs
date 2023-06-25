@@ -7,6 +7,17 @@ namespace BookWorm.ViewModel
 {
     public class LibraryVM : BaseVM, ILibrary
     {
+        private static BookLibrary ? _selectedBook;
+
+        private static string ?_searchRequest;
+
+        private string _name;
+
+        private static List<BookLibrary>? _bookslibrary;
+
+        private IEnumerable<string?> _listOfImage;
+
+        private List<BookDto> _libraryList;
         public ICommand LoadLibrary { get; set; }
         public ICommand SearchingBooksCommand { get; set; }
         public ICommand ViewBookCommand { get; set; }
@@ -40,17 +51,7 @@ namespace BookWorm.ViewModel
             }
         }
 
-        private static BookLibrary _selectedBook;
-
-        private static string _searchRequest;
-
-        private string _name;
-
-        private static List<BookLibrary>? _bookslibrary;
-
-        private IEnumerable<string?> _listOfImage;
-
-        private List<BookDto> _libraryList;
+       
         public BookLibrary SelectedBook {
             get
             {

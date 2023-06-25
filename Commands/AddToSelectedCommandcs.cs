@@ -15,24 +15,31 @@ namespace BookWorm.Commands
 
             this._mainSelectedVm= mainSelectedVm;
         }
+
         protected override async Task ExecuteAsync(object? parameter)
         {
             try
             {
                 var selectedBook = parameter as ListViewItem;
-                BookLibrary? bookLibrary = selectedBook.Content as BookLibrary;
+                BookLibrary? bookLibrary = selectedBook?.Content as BookLibrary;
                 BooksDatabaseManager booksDatabaseManager = new BooksDatabaseManager();
      
-                var book = new Books(bookLibrary.Id.ToString(),
-                        bookLibrary.Author.ToString(), bookLibrary.Url, bookLibrary.Title,
+                var book = new Books(bookLibrary?.Id.ToString(),
+                        bookLibrary.Author?.ToString(), bookLibrary.Url, bookLibrary.Title,
                         null, _mainSelectedVm.User.Id);
             
                 if (book != null)
                 {
-                    await booksDatabaseManager.AddBookAsync(book);
-                    await booksDatabaseManager.AddFavouriteBook(book);
+                    if (await booksDatabaseManager.AddBookAsync(book))
+                    {
+                        await booksDatabaseManager.AddFavouriteBook(book);
+                        MessageBox.Show("Книгу додано до книжкової полички");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Книга наявна в списку обраного");
+                    }
                 }
-                MessageBox.Show("Книгу додано до книжкової полички");
             }
             catch(Exception ex)
             {

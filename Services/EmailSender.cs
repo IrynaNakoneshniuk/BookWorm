@@ -2,6 +2,8 @@
 using System.Net;
 using System.Threading.Tasks;
 using UserSecrets;
+using System;
+using System.Windows;
 
 namespace BookWorm.Services
 {
@@ -20,15 +22,22 @@ namespace BookWorm.Services
 
         public async Task SendAsync(string ?to, string ?subject, string? body)
         {
-            using (var client = new SmtpClient(_smtpServer, _smtpPort))
+            try
             {
-                client.EnableSsl = _enableSsl;
-                client.Credentials = new NetworkCredential(Secrets.GmailLogin, Secrets.GmailAppPass);
-
-                using (var message = new MailMessage(Secrets.GmailLogin, to, subject, body))
+                using (var client = new SmtpClient(_smtpServer, _smtpPort))
                 {
-                    await client.SendMailAsync(message);
+                    client.EnableSsl = _enableSsl;
+                    client.Credentials = new NetworkCredential(Secrets.GmailLogin, Secrets.GmailAppPass);
+
+                    using (var message = new MailMessage(Secrets.GmailLogin, to, subject, body))
+                    {
+                        await client.SendMailAsync(message);
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

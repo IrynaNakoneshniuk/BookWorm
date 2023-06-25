@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BookWorm.Commands
 {
@@ -24,60 +25,81 @@ namespace BookWorm.Commands
         }
         protected async override Task ExecuteAsync(object? parameter)
         {
-            if (_mainSelectorVm.User != null)
+            try
             {
-                var userId = _mainSelectorVm.User.Id;
-                _listOfUsersBooks = await _booksDatabaseManager.GetListBooksByIdUser(userId);
-
-                if (_listOfUsersBooks.Count > 0)
+                if (this._mainSelectorVm.User != null)
                 {
-                    await LoadingFavoriteBooks();
-                    await LoadingReadingBooks();
-                }
+                    var userId = this._mainSelectorVm.User.Id;
+                    this._listOfUsersBooks = await _booksDatabaseManager.GetListBooksByIdUser(userId);
 
-                _mainSelectorVm.SelectView = _mainSelectorVm.BookShelfVM;
+                    if (_listOfUsersBooks.Count > 0)
+                    {
+                        await LoadingFavoriteBooks();
+                        await LoadingReadingBooks();
+                    }
+
+                    this._mainSelectorVm.SelectView = this._mainSelectorVm.BookShelfVM;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public async  Task LoadingFavoriteBooks ()
         {
-            List <Books> listBooks= new List<Books>();
-
-            var userId = _mainSelectorVm.User.Id;
-            List<FavoriteBooks> favoriteBooks =
-                await _booksDatabaseManager.GetFavoriteBooksByIdUser(userId);
-
-            if(favoriteBooks.Count > 0)
+            try
             {
-                foreach(var favoriteBook in favoriteBooks)
+                List<Books> listBooks = new List<Books>();
+
+                var userId = _mainSelectorVm.User.Id;
+                List<FavoriteBooks> favoriteBooks =
+                    await _booksDatabaseManager.GetFavoriteBooksByIdUser(userId);
+
+                if (favoriteBooks.Count > 0)
                 {
-                    var book = (from books in _listOfUsersBooks
+                    foreach (var favoriteBook in favoriteBooks)
+                    {
+                        var book = (from books in this._listOfUsersBooks
                                     where books.Id == favoriteBook.BookId
                                     select books).FirstOrDefault();
-                    listBooks.Add(book);
+                        listBooks.Add(book);
+                    }
+                    this._mainSelectorVm.BookShelfVM.SelectedBooksList = listBooks;
                 }
-                _mainSelectorVm.BookShelfVM.SelectedBooksList = listBooks;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);    
             }
         }
 
         public async Task LoadingReadingBooks()
         {
-            List<Books> listBooks = new List<Books>();
-
-            var userId = _mainSelectorVm.User.Id;
-            List<ReadingBooks> readingBooks =
-                await _booksDatabaseManager.GetReadingBooksByIdUser(userId);
-
-            if (readingBooks.Count > 0)
+            try
             {
-                foreach (var readingBook in readingBooks)
+                List<Books> listBooks = new List<Books>();
+
+                var userId = this._mainSelectorVm.User.Id;
+                List<ReadingBooks> readingBooks =
+                    await this._booksDatabaseManager.GetReadingBooksByIdUser(userId);
+
+                if (readingBooks.Count > 0)
                 {
-                    var book = (from books in _listOfUsersBooks
-                                where books.Id == readingBook.BookId
-                                select books).FirstOrDefault();
-                    listBooks.Add(book);
+                    foreach (var readingBook in readingBooks)
+                    {
+                        var book = (from books in this._listOfUsersBooks
+                                    where books.Id == readingBook.BookId
+                                    select books).FirstOrDefault();
+                        listBooks.Add(book);
+                    }
+                    this._mainSelectorVm.BookShelfVM.ReadingBooksList = listBooks;
                 }
-                _mainSelectorVm.BookShelfVM.ReadingBooksList = listBooks;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

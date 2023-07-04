@@ -33,6 +33,22 @@ namespace BookWorm.ViewModel
 
         private IReadingModeVM _readingModeVM;
 
+        private IRecoveryPasswordVM _recoveryPasswordVm;
+
+        public IRecoveryPasswordVM RecoveryPasswordVM
+        {
+            get
+            {
+                return _recoveryPasswordVm;
+            }
+
+            set
+            {
+                _recoveryPasswordVm = value;
+                OnPropertyChanged(nameof(RecoveryPasswordVM));
+            }
+        }
+
         public string ExecutionState
         {
             get { return _executionState; }
@@ -155,7 +171,7 @@ namespace BookWorm.ViewModel
 
         public MainVM(IUserLoginVM userLoginVM, ILibrary libraryVM, IRegistrationVM registrationVM,
             IValidatioinEmailVM validatioinEmailVM,IDescriptionBooKVM descriptionBooKVm, IBookShelfVM bookShelfVM, 
-            IReadingModeVM readingModeVM)
+            IReadingModeVM readingModeVM, IRecoveryPasswordVM recoveryPasswordVm)
         {
             this._baseVM = this;
             this._descriptionBooKVm = descriptionBooKVm;
@@ -165,6 +181,7 @@ namespace BookWorm.ViewModel
             this._userLogin = userLoginVM;
             this._bookShelfVM = bookShelfVM;
             this._readingModeVM = readingModeVM;
+            this._recoveryPasswordVm= recoveryPasswordVm;
         }
     }
 }

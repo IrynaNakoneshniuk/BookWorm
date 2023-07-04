@@ -19,6 +19,7 @@ namespace BookWorm.ViewModel
         IDescriptionBooKVM DescriptionBooKVm { get; set; }
         IBookShelfVM BookShelfVM { get; set; }
         IReadingModeVM ReadingModeVM { get; set; }
+        public IRecoveryPasswordVM RecoveryPasswordVM { get; set; }
         string ExecutionState { get; set; }
     }
 }

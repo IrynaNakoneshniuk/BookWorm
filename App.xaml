@@ -33,6 +33,9 @@
             <DataTemplate DataType="{x:Type viewmodels:ValidationEmailVM}">
                 <view:ValidationEmail/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:RecoveryPasswordVM}">
+                <view:RecoveryPasswordView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

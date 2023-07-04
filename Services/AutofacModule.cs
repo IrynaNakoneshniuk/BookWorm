@@ -36,6 +36,7 @@ namespace BookWorm.Services
             builder.RegisterType<EditСommentСommand>();
             builder.RegisterType<TranslateWordCommand>();
             builder.RegisterType<ExitCommand>();
+            builder.RegisterType<PasswordRecoveryCommand>();
             return builder.Build();
         }
     }

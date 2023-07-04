@@ -1,9 +1,7 @@
 ﻿using Autofac;
 using BookWorm.Commands;
-using BookWorm.DataAccess;
 using BookWorm.Services;
 using BookWorm.ViewModel;
-using CommonServiceLocator;
 using System.Windows.Controls;
 using System.Windows.Input;
 

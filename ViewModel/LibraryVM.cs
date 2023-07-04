@@ -25,7 +25,7 @@ namespace BookWorm.ViewModel
 
         private bool _isFieldVisibil = true;
 
-        private static bool _isSearchingByLanguage;
+        private static bool _isSearchingByLanguage=false;
 
         public bool IsSearchingByLanguage
         {

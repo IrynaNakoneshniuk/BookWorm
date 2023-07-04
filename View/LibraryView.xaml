@@ -29,7 +29,8 @@
                     <RadioButton Margin="15 5 5 5"
                  Style="{StaticResource MaterialDesignRadioButton}"
                  Tag="True"
-                 Content="За мовою" IsChecked="{Binding IsSearchingByLanguage,Mode=TwoWay,Converter={StaticResource BooleanToVisibilityConverter}}">
+                 Content="За мовою" IsChecked="{Binding Library.IsSearchingByLanguage,Mode=TwoWay}"
+                                 Focusable="False">
                         
                     </RadioButton>
                     <RadioButton Margin="15 5 5 5"

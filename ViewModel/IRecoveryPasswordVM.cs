@@ -2,7 +2,7 @@
 
 namespace BookWorm.ViewModel
 {
-    public interface IRecoveryPasswordVM
+    public interface IRecoveryPasswordVM: IBaseVM
     {
         string Email { get; set; }
         string ErrorMessage { get; set; }
@@ -12,5 +12,6 @@ namespace BookWorm.ViewModel
         int? RecoveryCode { get; set; }
         ICommand RecoveryPasswordCommand { get; set; }
         string Repassword { get; set; }
+        bool IsFormVisibil { get; set; }
     }
 }

@@ -11,9 +11,11 @@
      TextElement.FontSize="13"
      TextOptions.TextFormattingMode="Ideal"
      TextOptions.TextRenderingMode="Auto"
-             Background="#fafafa"
      FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="1000" d:DesignWidth="830">
+    <UserControl.Background>
+        <ImageBrush ImageSource="\Assets\book.jpg" Stretch="Fill" Opacity="0.5"/>
+    </UserControl.Background>
     <Grid>
         <ContentControl Content="{Binding SelectView,Mode=TwoWay}" Foreground="Transparent"/>
         <Border Visibility="{Binding  BookShelfVM.IsVisibil,Converter={StaticResource BooleanToVisibilityConverter}, Mode=TwoWay}">
@@ -34,7 +36,7 @@
             </ListView.ItemsPanel>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Border Background="White" Margin="20"  Height="270" Width="400" CornerRadius="10" BorderThickness="1"
+                            <Border Background="Transparent" Margin="20"  Height="270" Width="400" CornerRadius="10" BorderThickness="1"
                              BorderBrush="Transparent">
 
                                 <Grid>
@@ -51,7 +53,7 @@
                                             <DropShadowEffect Direction="35" Color="#47667b" ShadowDepth="7" BlurRadius="5" />
                                         </Image.Effect>
                                     </Image>
-                                    <materialDesign:PopupBox Grid.Column="0"  VerticalAlignment="Top">
+                                    <materialDesign:PopupBox Grid.Column="0"  VerticalAlignment="Top" Margin="10 10 0 0">
                                         <materialDesign:PopupBox.ToggleCheckedContent>
                                             <materialDesign:PackIcon
                                                     Kind="Pencil"
@@ -125,7 +127,7 @@
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <materialDesign:PopupBox Grid.Column="0"  VerticalAlignment="Top">
+                                    <materialDesign:PopupBox Grid.Column="0"  VerticalAlignment="Top" Margin="10 0 0 0" >
                                             <materialDesign:PopupBox.ToggleCheckedContent>
                                                 <materialDesign:PackIcon
                                                     Kind="Pencil"
@@ -155,7 +157,7 @@
 
                                             </StackPanel>
                                         </materialDesign:PopupBox>
-                                        <Image Source="{Binding UrlImage,Mode=TwoWay}" Height="250" Width="200" Margin="10">
+                                        <Image Source="{Binding UrlImage,Mode=TwoWay}" Height="250" Width="190" Margin="10">
                                             <Image.Effect>
                                                 <DropShadowEffect Direction="35" Color="#47667b" ShadowDepth="7" BlurRadius="5" />
                                             </Image.Effect>

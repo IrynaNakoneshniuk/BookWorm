@@ -34,6 +34,7 @@ namespace BookWorm.View
             {
                 this._mainselectorVm= scope.Resolve<IBase>();
                 this._mainselectorVm.LogginUser.ValidationCommand = scope.Resolve<ValidationEmailCommand>();
+                this._mainselectorVm.SelectViewCommand = new SelectViewCommand(this._mainselectorVm);
                 this._mainselectorVm.LogginUser.Loggin = scope.Resolve<LogginCommand>();
             }
 

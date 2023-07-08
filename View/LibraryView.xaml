@@ -10,14 +10,17 @@
      TextElement.FontSize="13"
      TextOptions.TextFormattingMode="Ideal"
      TextOptions.TextRenderingMode="Auto"
-     Background="#E2FFFF"
+     
      FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="830">
+    <UserControl.Background>
+        <ImageBrush ImageSource="\Assets\book.jpg" Stretch="Fill" Opacity="0.5"/>
+        </UserControl.Background>
     <Grid>
         <ContentControl   Content="{Binding SelectView,Mode=TwoWay}" Foreground="Transparent"/>
         <Border  Visibility="{Binding Library.IsFieldVisibil, Converter={StaticResource BooleanToVisibilityConverter}}"
-              Background="#fafafa" >
+              Background="Transparent" >
            
             <Grid>
                 <Grid.RowDefinitions>

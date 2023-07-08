@@ -6,7 +6,9 @@ namespace BookWorm.ViewModel
     {
         private string _errorMessage;
 
-        private int? _recoveryCode;
+        private static int? _recoveryCode;
+
+        private static bool _isFormVisibil = true;
 
         private string _email;
 
@@ -14,10 +16,20 @@ namespace BookWorm.ViewModel
 
         private string _repassword;
 
-        private bool _isCodeFieldEnable;
+        private bool _isCodeFieldEnable=false;
 
-        private bool _isPasswordFieldEnable;
+        private bool _isPasswordFieldEnable=false;
         public ICommand RecoveryPasswordCommand { get; set; }
+
+        public bool IsFormVisibil
+        {
+            get { return _isFormVisibil; }
+            set
+            {
+                _isFormVisibil = value;
+                OnPropertyChanged(nameof(IsFormVisibil));
+            }
+        }
         public string ErrorMessage
         {
             get { return _errorMessage; }

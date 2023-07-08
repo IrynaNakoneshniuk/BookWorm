@@ -23,6 +23,7 @@ namespace BookWorm.Services
             builder.RegisterType<ValidationEmailVM>().As<IValidatioinEmailVM>();
             builder.RegisterType<UserLoginVM>().As<IUserLoginVM>();
             builder.RegisterType<RegistrationVM>().As<IRegistrationVM>();
+            builder.RegisterType<RecoveryPasswordVM>().As<IRecoveryPasswordVM>();
             builder.RegisterType<LibraryVM>().As<ILibrary>();
             builder.RegisterType<BookLibrary>();
             builder.RegisterType<ViewBookCommand>();

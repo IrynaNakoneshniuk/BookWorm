@@ -59,6 +59,11 @@ namespace BookWorm.Commands
                     {
                         _mainSelectorView.SelectView = _mainSelectorView.ValidationVM;
                     }
+                    else if(parameter.ToString()== "Recovery")
+                    {
+                        _mainSelectorView.LogginUser.IsFieldVisibil = false;
+                        _mainSelectorView.SelectView = _mainSelectorView.RecoveryPasswordVM;
+                    }
                 }
                 catch (Exception ex)
                 {
